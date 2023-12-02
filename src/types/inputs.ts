@@ -1,20 +1,29 @@
 import { HTMLProps, ReactNode, ReactElement } from 'react'
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
 
-export type WrapperProps = {
-	children: ReactNode,
+interface DefaultProps {
 	name: string,
 	label: string,
 	help?: string,
-	BeforeIcon?: ReactElement,
-	AfterIcon?: ReactElement,
+	beforeicon?: ReactElement,
+	aftericon?: ReactElement,
 }
 
-export interface InputProps extends HTMLProps<HTMLInputElement> {
-	label: string,
+
+export interface WrapperProps extends DefaultProps {
+	children: ReactNode,
+}
+
+export interface InputProps extends DefaultProps, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
 	validation?: RegisterOptions<FieldValues, string>,
-	name: string,
-	help?: string,
-	BeforeIcon?: ReactElement,
-	AfterIcon?: ReactElement,
+}
+
+
+export interface SelectProps extends DefaultProps, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
+	children?: ReactNode,
+	validation?: RegisterOptions<FieldValues, string>,
+	options: {
+		label: string,
+		value: any
+	}[]
 }

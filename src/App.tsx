@@ -1,11 +1,17 @@
-import { FormtoolsForm, FormtoolsInput } from './components'
+import {
+  FormtoolsForm,
+  FormtoolsInput,
+  FormtoolsPassword,
+  FormtoolsSelect
+} from './components'
 import { SubmitHandler, useForm, FieldValues } from 'react-hook-form'
 
 import { IoMdPerson } from "react-icons/io"
 
 interface UserLogin {
   email: string,
-  password: string
+  password: string,
+  favoriteFood: string
 }
 
 export default function App() {
@@ -21,11 +27,29 @@ export default function App() {
         label="Email: "
         type="email"
         name="email"
-        id="email"
         help="Digite seu email"
         validation={{ required: true }}
 
-        AfterIcon={<IoMdPerson/>}
+        beforeicon={<IoMdPerson/>}
+        aftericon={<IoMdPerson/>}
+      />
+
+      <FormtoolsPassword
+        label="Senha: "
+        name="password"
+        help="Digite sua senha"
+        validation={{ required: true }}
+      />
+
+      <FormtoolsSelect
+        label="Comida Favorita: "
+        name="favoriteFood"
+        help="Selecione sua comida favorita"
+        options={[
+          { label: 'Sorvete', value: 'ice-cream' },
+          { label: 'Hamburguer', value: 'hamburguer' },
+          { label: 'Suco', value: 'juice' },
+        ]}
       />
 
       <button type="submit">ENVIAR</button>
