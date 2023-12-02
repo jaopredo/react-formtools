@@ -22,8 +22,9 @@ export interface InputProps extends DefaultProps, Omit<HTMLProps<HTMLInputElemen
 export interface SelectProps extends DefaultProps, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
 	children?: ReactNode,
 	validation?: RegisterOptions<FieldValues, string>,
-	options: {
+	options?: {
 		label: string,
 		value: any
-	}[]
+	}[],
+	asyncLoad?: () => Promise<any>
 }

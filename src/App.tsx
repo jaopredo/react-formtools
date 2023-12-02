@@ -17,6 +17,22 @@ interface UserLogin {
 export default function App() {
   const methods = useForm<UserLogin>()
 
+  const getFoods = async function () {
+    return [
+      { label: 'Sorvete', value: 'ice-cream' },
+      { label: 'Hamburguer', value: 'hamburguer' },
+      { label: 'Suco', value: 'juice' },
+    ]
+  }
+  const promiseFoods = function () {
+    return new Promise(resolve => {
+      setTimeout(()=>{
+          resolve(getFoods)
+          console.log('carregou')
+        }, 5000)
+    })
+  }
+
   const handleSubmit: SubmitHandler<UserLogin> = (data: UserLogin) => {
     console.log(data)
   }
@@ -45,11 +61,12 @@ export default function App() {
         label="Comida Favorita: "
         name="favoriteFood"
         help="Selecione sua comida favorita"
-        options={[
-          { label: 'Sorvete', value: 'ice-cream' },
-          { label: 'Hamburguer', value: 'hamburguer' },
-          { label: 'Suco', value: 'juice' },
-        ]}
+        asyncLoad={promiseFoods}
+        // options={[
+        //   { label: 'Sorvete', value: 'ice-cream' },
+        //   { label: 'Hamburguer', value: 'hamburguer' },
+        //   { label: 'Suco', value: 'juice' },
+        // ]}
       />
 
       <button type="submit">ENVIAR</button>
