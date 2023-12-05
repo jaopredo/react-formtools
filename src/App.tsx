@@ -3,7 +3,8 @@ import {
   FormtoolsInput,
   FormtoolsPassword,
   FormtoolsSelect,
-  FormtoolsSearch
+  FormtoolsSearch,
+  FormtoolsCheckbox
 } from './components'
 import { SubmitHandler, useForm, FieldValues, UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -13,8 +14,12 @@ import { IoMdPerson } from "react-icons/io"
 interface UserLogin {
   email: string,
   password: string,
+  
   product: number,
-  products: number[]
+  products: number[],
+
+  terms: boolean,
+  orders: string[]
 }
 
 export default function App() {
@@ -47,7 +52,6 @@ export default function App() {
         type="email"
         name="email"
         help="Digite seu email"
-        validation={{ required: true }}
 
         beforeicon={<IoMdPerson/>}
         aftericon={<IoMdPerson/>}
@@ -57,7 +61,6 @@ export default function App() {
         label="Senha: "
         name="password"
         help="Digite sua senha"
-        validation={{ required: true }}
       />
 
       <FormtoolsSearch
@@ -69,8 +72,6 @@ export default function App() {
 
         mapper={(data: any) => data.map((entry: any) => ({ label: entry.name, value: entry.id }))}
       />
-
-      <button type="submit">ENVIAR</button>
 
       <FormtoolsSearch
         label="Comida Favorita: "
@@ -94,6 +95,26 @@ export default function App() {
           { label: 'Suco', value: 'juice' },
         ]}
       />*/}
+
+      <FormtoolsCheckbox
+        label="Termos e condições de uso: "
+        name="terms"
+        help="Aceite os termos de condição de usuário"
+      />
+
+      <FormtoolsCheckbox
+        label="Escolha os temperos: "
+        name="orders"
+        help="Selecione os temperos da sua pizza!"
+        options={[
+          { label: 'Pepperoni', value: 'pepperoni' },
+          { label: 'Queijo', value: 'cheese' },
+          { label: 'Carne de sol', value: 'goat-meat' },
+          { label: 'Chocolate', value: 'chocolate' }
+        ]}
+      />
+
+      <button type="submit">ENVIAR</button>
     </FormtoolsForm>
   </div>
 }

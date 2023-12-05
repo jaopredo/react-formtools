@@ -48,9 +48,6 @@ export function FormtoolsSearch (props: SearchProps) {
 
     return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
     aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
-        <button onClick={()=>{
-            console.log(getValues(`${props.name}`))
-        }}>TESTE</button>
         <input type="hidden" {...register(props.name, props.validation)}/>
         {props.multiple && <ul>
             {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
