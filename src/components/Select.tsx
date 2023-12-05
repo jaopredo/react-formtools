@@ -1,5 +1,5 @@
 import { forwardRef, useState, MutableRefObject, Children, useEffect} from 'react'
-import { SelectProps } from '../types/inputs'
+import { SelectProps, OptionType } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'
 import { IoIosArrowDown } from "react-icons/io"
@@ -9,7 +9,7 @@ export function FormtoolsSelect (props: SelectProps) {
 	const [ showDropdown, setShowDropdown ] = useState<boolean>(false)
 	const [ inputLabel, setInputLabel ] = useState<string>('')
 
-	const [ options, setOptions ] = useState<typeof props.options>(props.options)
+	const [ options, setOptions ] = useState<OptionType[]|undefined>(props.options)
 
 	const handleClickSelect = () => setShowDropdown(!showDropdown)
 	const handleClickOption = (label: string, value: string) => {
@@ -19,7 +19,7 @@ export function FormtoolsSelect (props: SelectProps) {
 
 	useEffect(() => {
 		if (props.asyncLoad) {
-			props.asyncLoad().then(resp => resp().then((r: typeof props.options) => setOptions(r)))
+			props.asyncLoad().then(resp => resp().then((r: OptionType[]) => setOptions(r)))
 		}
 	}, [])
 
