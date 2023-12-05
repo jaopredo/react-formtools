@@ -5,7 +5,8 @@ import {
   FormtoolsSelect,
   FormtoolsSearch
 } from './components'
-import { SubmitHandler, useForm, FieldValues } from 'react-hook-form'
+import { SubmitHandler, useForm, FieldValues, UseFormReturn } from 'react-hook-form'
+import { useState } from 'react'
 
 import { IoMdPerson } from "react-icons/io"
 
@@ -17,7 +18,7 @@ interface UserLogin {
 }
 
 export default function App() {
-  const methods = useForm<UserLogin>()
+  const [ methods, setMethods ] = useState<UseFormReturn>()
 
   const getFoods = async function () {
     return [
@@ -35,12 +36,12 @@ export default function App() {
     })
   }
 
-  const handleSubmit: SubmitHandler<UserLogin> = (data: UserLogin) => {
+  const handleSubmit = (data: UserLogin) => {
     console.log(data)
   }
 
   return <div className="App">
-    <FormtoolsForm onSubmit={methods.handleSubmit(handleSubmit)} methods={methods}>
+    <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods}>
       <FormtoolsInput
         label="Email: "
         type="email"

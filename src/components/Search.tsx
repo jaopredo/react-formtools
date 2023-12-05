@@ -38,7 +38,7 @@ export function FormtoolsSearch (props: SearchProps) {
 
     const getData = async function () {
         // Mando uma requisição com os parâmetros que o usuário informar que devem ser feitos
-        return fetch(`${props.url}?` + new URLSearchParams(props.filterSchema(inputLabel))).then(resp => resp.json()).then(data => props.mapper?props.mapper(data):undefined)
+        return fetch(`${props.url}?` + new URLSearchParams(props.filterSchema(inputLabel))).then(resp => resp.json()).then(data => props.mapper?props.mapper(data):undefined).catch(err=>Promise.reject(err))
     }
 
     useEffect(() => {
