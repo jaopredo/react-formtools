@@ -1,4 +1,4 @@
-import { forwardRef, useState, LegacyRef, Children, useEffect, useRef} from 'react'
+import { useState, Children, useEffect, useRef} from 'react'
 import { SearchProps, OptionType } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext, useFieldArray } from 'react-hook-form'

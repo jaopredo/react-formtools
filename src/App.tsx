@@ -7,7 +7,8 @@ import {
   FormtoolsCheckbox,
   FormtoolsRadio,
   FormtoolsToggle,
-  FormtoolsFile
+  FormtoolsFile,
+  FormtoolsTaglist,
 } from './components'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -27,7 +28,9 @@ interface UserLogin {
   best: string,
   theme: boolean,
 
-  image: File
+  image: File,
+
+  favoriteClasses: string[]
 }
 
 export default function App() {
@@ -44,16 +47,35 @@ export default function App() {
     return new Promise(resolve => {
       setTimeout(()=>{
           resolve(getFoods)
-          console.log('carregou')
         }, 5000)
     })
   }
 
+
+  const getClasses = async function () {
+    return [
+      { label: 'Matemática', value: 'math' },
+      { label: 'Química', value: 'chimestry' },
+      { label: 'Física', value: 'physis' },
+      { label: 'Biologia', value: 'biology' },
+      { label: 'História', value: 'history' },
+    ]
+  }
+  const promiseClasses = function () {
+    return new Promise(resolve => {
+      setTimeout(()=>{
+          resolve(getClasses)
+        }, 5000)
+    })
+  }
+
+
   const handleSubmit = (data: UserLogin|FormData) => {
+    console.log(data)
   }
 
   return <div className="App">
-    <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods} multipart>
+    <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods}>
       <FormtoolsInput
         label="Email: "
         type="email"
@@ -158,6 +180,23 @@ export default function App() {
         placeholder="Selecione uma foto"
         help="Envie uma foto sua"
         name="image"
+      />
+
+      <FormtoolsTaglist
+        label="Matérias preferidas"
+        placeholder="Selecione as matérias"
+        help="Selecione as matérias favoritas"
+        name="favoriteClasses"
+
+        type="async"
+        // options={[
+        //   { label: 'Matemática', value: 'math' },
+        //   { label: 'Química', value: 'chimestry' },
+        //   { label: 'Física', value: 'physis' },
+        //   { label: 'Biologia', value: 'biology' },
+        //   { label: 'História', value: 'history' },
+        // ]}
+        asyncLoad={promiseClasses}
       />
 
       <button type="submit">ENVIAR</button>

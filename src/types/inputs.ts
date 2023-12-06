@@ -26,13 +26,13 @@ export type OptionType = {
 	value: any
 }
 
-export interface SelectProps extends DefaultProps, OmitedProps<HTMLSelectElement> {
+export interface SelectProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
 	options?: OptionType[],
 	asyncLoad?: () => Promise<any>
 }
 
 
-export interface SearchProps extends DefaultProps, OmitedProps<HTMLSelectElement> {
+export interface SearchProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
 	url: string,
 	filterSchema: (value: any) => string | string[][] | Record<string, string> | URLSearchParams | undefined,
 	mapper?: (data: any) => OptionType[],
@@ -59,4 +59,11 @@ export interface ToggleProps extends DefaultProps, OmitedProps<HTMLInputElement>
 
 export interface FileProps extends Omit<DefaultProps, 'beforeicon'>, OmitedProps<HTMLInputElement> {
 	multiple?: boolean
+}
+
+
+export interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLInputElement> {
+	options?: OptionType[],
+	asyncLoad?: () => Promise<OptionType[]>,
+	type?: 'typing' | 'async' | 'options',
 }
