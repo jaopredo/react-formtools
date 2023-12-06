@@ -6,9 +6,10 @@ import {
   FormtoolsSearch,
   FormtoolsCheckbox,
   FormtoolsRadio,
-  FormtoolsToggle
+  FormtoolsToggle,
+  FormtoolsFile
 } from './components'
-import { SubmitHandler, useForm, FieldValues, UseFormReturn } from 'react-hook-form'
+import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
 
 import { IoMdPerson } from "react-icons/io"
@@ -25,6 +26,8 @@ interface UserLogin {
 
   best: string,
   theme: boolean,
+
+  image: File
 }
 
 export default function App() {
@@ -46,17 +49,17 @@ export default function App() {
     })
   }
 
-  const handleSubmit = (data: UserLogin) => {
-    console.log(data)
+  const handleSubmit = (data: UserLogin|FormData) => {
   }
 
   return <div className="App">
-    <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods}>
+    <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods} multipart>
       <FormtoolsInput
         label="Email: "
         type="email"
         name="email"
         help="Digite seu email"
+        placeholder="exemplo@dominio.com"
 
         beforeicon={<IoMdPerson/>}
         aftericon={<IoMdPerson/>}
@@ -66,11 +69,19 @@ export default function App() {
         label="Senha: "
         name="password"
         help="Digite sua senha"
+        placeholder="xxxxxxxx"
+        validation={{
+          minLength: {
+            value: 8,
+            message: 'A senha deve conter no mínimo 8 caracteres'
+          }
+        }}
       />
 
       <FormtoolsSearch
-        label="Comida Favorita: "
+        label="Produto Favorito: "
         name="product"
+        placeholder="Selecione aqui o produto"
         help="Selecione seu produto favorito"
         url='http://makeup-api.herokuapp.com/api/v1/products.json'
         filterSchema={(value) => ({ product_type: value })}
@@ -79,9 +90,10 @@ export default function App() {
       />
 
       <FormtoolsSearch
-        label="Comida Favorita: "
+        label="Produto favorito (Múltiplo): "
         multiple
         name="products"
+        placeholder="uuuuoooooo"
         help="Selecione seus produtos favoritos"
         url='http://makeup-api.herokuapp.com/api/v1/products.json'
         filterSchema={(value) => ({ product_type: value })}
@@ -92,6 +104,7 @@ export default function App() {
       <FormtoolsSelect
         label="Comida Favorita: "
         name="favoriteFood"
+        placeholder="Selecione aqui a sua comida"
         help="Selecione sua comida favorita"
         // asyncLoad={promiseFoods}
         options={[
@@ -105,6 +118,7 @@ export default function App() {
         label="Termos e condições de uso: "
         name="terms"
         help="Aceite os termos de condição de usuário"
+        placeholder="Clique ao lado para aceitar os termos e condições de usuário"
       />
 
       <FormtoolsCheckbox
@@ -136,6 +150,14 @@ export default function App() {
         toggled
         turnedOffValue="light"
         turnedOnValue="dark"
+        placeholder="Tema Escuro"
+      />
+
+      <FormtoolsFile
+        label="Imagem sua"
+        placeholder="Selecione uma foto"
+        help="Envie uma foto sua"
+        name="image"
       />
 
       <button type="submit">ENVIAR</button>

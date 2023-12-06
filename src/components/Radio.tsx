@@ -46,8 +46,8 @@ export function FormtoolsToggle(props: ToggleProps) {
 		<div onClick={handleToggle} style={{
 			width: '50px',
 			height: '50px',
-			backgroundColor: 'blue',
+			backgroundColor: (toggled==props.turnedOnValue) || (typeof toggled == 'boolean' && toggled)?'green':'red',
 			borderRadius: '50%'
-		}}></div>
+		}}></div> {props.placeholder}
 	</Wrapper>
 }

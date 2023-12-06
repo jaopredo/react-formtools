@@ -25,7 +25,7 @@ export function FormtoolsSelect (props: SelectProps) {
 
 	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
 	aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
-		<input value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
+		<input placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
 		{showDropdown && <ul>
 			{options && Children.toArray(options?.map(opt => <li onClick={() => handleClickOption(opt.label, opt.value)}>{opt.label}</li>))}
 			{!options && <p>Carregando...</p>}
