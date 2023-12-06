@@ -4,7 +4,9 @@ import {
   FormtoolsPassword,
   FormtoolsSelect,
   FormtoolsSearch,
-  FormtoolsCheckbox
+  FormtoolsCheckbox,
+  FormtoolsRadio,
+  FormtoolsToggle
 } from './components'
 import { SubmitHandler, useForm, FieldValues, UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -19,7 +21,10 @@ interface UserLogin {
   products: number[],
 
   terms: boolean,
-  orders: string[]
+  orders: string[],
+
+  best: string,
+  theme: boolean,
 }
 
 export default function App() {
@@ -84,7 +89,7 @@ export default function App() {
         mapper={(data: any) => data.map((entry: any) => ({ label: entry.name, value: entry.id }))}
       />
 
-      {/*<FormtoolsSelect
+      <FormtoolsSelect
         label="Comida Favorita: "
         name="favoriteFood"
         help="Selecione sua comida favorita"
@@ -94,7 +99,7 @@ export default function App() {
           { label: 'Hamburguer', value: 'hamburguer' },
           { label: 'Suco', value: 'juice' },
         ]}
-      />*/}
+      />
 
       <FormtoolsCheckbox
         label="Termos e condições de uso: "
@@ -112,6 +117,25 @@ export default function App() {
           { label: 'Carne de sol', value: 'goat-meat' },
           { label: 'Chocolate', value: 'chocolate' }
         ]}
+      />
+
+      <FormtoolsRadio
+        label="Escolha uma das opções"
+        help="Qual é o melhor?"
+        name="best"
+        options={[
+          { label: 'Goku', value: 'goku' },
+          { label: 'Naruto', value: 'naruto' },
+        ]}
+      />
+
+      <FormtoolsToggle
+        label="Ligar tema escuro"
+        help="Aperte para ligar o tema escuro"
+        name="theme"
+        toggled
+        turnedOffValue="light"
+        turnedOnValue="dark"
       />
 
       <button type="submit">ENVIAR</button>

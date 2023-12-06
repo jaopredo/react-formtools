@@ -43,3 +43,15 @@ export interface SearchProps extends DefaultProps, OmitedProps<HTMLSelectElement
 export interface CheckboxProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 	options?: OptionType[]
 }
+
+
+export interface RadioProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	options: OptionType[]
+}
+
+export interface ToggleProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	toggled?: boolean,
+
+	turnedOffValue?: any,
+	turnedOnValue?: any
+}
