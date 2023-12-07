@@ -1,3 +1,5 @@
+import { DefaultProps } from '../types/inputs'
+
 export function jaroWinklerSimilarity(str1, str2) {
     const jaroSimilarity = jaroSimilarityCoefficient(str1, str2);
 
@@ -72,4 +74,12 @@ function countTranspositions(matches1, matches2) {
     }
 
     return transpositions;
+}
+
+
+// Função pra filtrar as propriedades padrão
+export function filterProperties(props: DefaultProps & { [x: string]: any }, overwrite: { [x: string]: any } = {}) {
+    const filterProps = [ 'label', 'aftericon', 'beforeicon', 'validation', 'help' ]
+
+    return Object.keys(props).map(prop => (filterProps.indexOf(prop)!==-1) || (Object.keys(overwrite).indexOf(prop)!==-1))
 }

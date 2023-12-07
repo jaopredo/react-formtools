@@ -2,7 +2,7 @@ import { HTMLProps, ReactNode, ReactElement } from 'react'
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
 
 
-interface DefaultProps {
+export interface DefaultProps {
 	name: string,
 	label: string,
 	help?: string,

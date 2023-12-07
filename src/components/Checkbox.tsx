@@ -7,7 +7,7 @@ export function FormtoolsCheckbox(props: CheckboxProps) {
 	const { register } = useFormContext()
 
 	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
-		{ !props.options && <><input type="checkbox" {...register(props.name, props.validation)} />{props.placeholder}</> }
+		{ !props.options && <><input type="checkbox" {...register(props.name, props.validation)} id={props.name} /><label htmlFor={props.name}>{props.placeholder}</label></> }
 		{ props.options && <ul>
 			{ Children.toArray(props.options.map(opt => <li>
 				<label htmlFor={opt.value}>{opt.label}</label>

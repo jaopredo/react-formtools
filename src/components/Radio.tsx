@@ -28,6 +28,9 @@ export function FormtoolsToggle(props: ToggleProps) {
 	}, [])
 
 	function handleToggle() {
+		if (props.onClick) {
+			props.onClick()
+		}
 		if (props.turnedOnValue && props.turnedOffValue) {
 			if (toggled == props.turnedOnValue) {
 				setValue(props.name, props.turnedOffValue)
@@ -48,6 +51,6 @@ export function FormtoolsToggle(props: ToggleProps) {
 			height: '50px',
 			backgroundColor: (toggled==props.turnedOnValue) || (typeof toggled == 'boolean' && toggled)?'green':'red',
 			borderRadius: '50%'
-		}}></div> {props.placeholder}
+		}} id={props.name}></div> <label onClick={handleToggle} htmlFor={props.name}>{props.placeholder}</label>
 	</Wrapper>
 }
