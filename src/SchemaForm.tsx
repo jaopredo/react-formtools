@@ -2,6 +2,14 @@ import { FormtoolsForm, FormtoolsSchema } from './components'
 
 const schema = [
 	{
+		formtool: 'mask',
+		name: 'cpf',
+		label: 'Digite seu cpf',
+		help: 'Digite seu cpf por favor',
+		placeholder: '000.000.000-00',
+		mask: '000.000.000-00'
+	},
+	{
 		formtool: 'group',
 		title: 'login',
 		children: [
@@ -45,7 +53,7 @@ const schema = [
 
 	{
 		formtool: 'select',
-        name: "favoriteFood",
+    name: "favoriteFood",
 		label: "Comida Favorita: ",
         placeholder: "Selecione aqui a sua comida",
         help: "Selecione sua comida favorita",
@@ -111,6 +119,14 @@ const schema = [
 	},
 
 	{
+		formtool: 'file',
+		label: "Imagem sua",
+        placeholder: "Selecione uma foto",
+        help: "Envie uma foto sua",
+        name: "image",
+	},
+
+	{
 		formtool: 'taglist',
 		label: "Matérias preferidas",
         placeholder: "Selecione as matérias",
@@ -142,6 +158,8 @@ const schema = [
 ]
 
 interface UserLogin {
+	cpf: string,
+
   email: string,
   password: string,
   

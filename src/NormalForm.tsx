@@ -9,7 +9,8 @@ import {
   FormtoolsToggle,
   FormtoolsFile,
   FormtoolsTaglist,
-  FormtoolsGroup
+  FormtoolsGroup,
+  FormtoolsMask
 } from './components'
 import { UseFormReturn } from 'react-hook-form'
 import { useState } from 'react'
@@ -17,6 +18,8 @@ import { useState } from 'react'
 import { IoMdPerson } from "react-icons/io"
 
 interface UserLogin {
+  cpf: string,
+
   email: string,
   password: string,
   
@@ -76,6 +79,13 @@ export default function NormalForm() {
   }
 
   return <FormtoolsForm<UserLogin> onSubmit={handleSubmit} setMethods={setMethods}>
+      <FormtoolsMask
+        label="Máscara de CPF"
+        name="cpf"
+        help="Digite seu CPF"
+        placeholder="000.000.000-00"
+        mask="000.000.000-00"
+      />
       <FormtoolsGroup title="Login">
         <FormtoolsInput
           label="Email: "

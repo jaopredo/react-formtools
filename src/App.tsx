@@ -9,7 +9,7 @@ export default function App() {
   return <div className="App">
     <button onClick={()=>setSchema(!schema)}>ALTERAR</button>
 
-    { schema && <NormalForm/> }
-    { !schema && <SchemaForm/> }
+    { !schema && <NormalForm/> }
+    { schema && <SchemaForm/> }
   </div>
 }

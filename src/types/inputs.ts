@@ -1,5 +1,6 @@
-import { HTMLProps, ReactNode, ReactElement } from 'react'
+import type { HTMLProps, ReactNode, ReactElement } from 'react'
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
+import type { ReactMaskProps } from 'react-imask'
 
 
 export interface DefaultProps {
@@ -66,4 +67,9 @@ export interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, OmitedPro
 	options?: OptionType[],
 	asyncLoad?: () => Promise<OptionType[]>,
 	type?: 'typing' | 'async' | 'options',
+}
+
+
+export interface MaskProps extends DefaultProps, OmitedProps<HTMLInputElement>, ReactMaskProps {
+	mask: string,
 }

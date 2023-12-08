@@ -1,5 +1,4 @@
 import { SchemaProps } from '../types/schema'
-import { filterProperties } from '../utils/functions'
 import {
 	FormtoolsInput,
 	FormtoolsPassword,
@@ -10,7 +9,8 @@ import {
 	FormtoolsToggle,
 	FormtoolsFile,
 	FormtoolsTaglist,
-	FormtoolsGroup
+	FormtoolsGroup,
+	FormtoolsMask
 } from '.'
 
 export function FormtoolsSchema(props: SchemaProps) {
@@ -38,6 +38,7 @@ export function FormtoolsSchema(props: SchemaProps) {
 		toggle: (schema, key) => <FormtoolsToggle {...schema} key={key} />,
 		file: (schema, key) => <FormtoolsFile {...schema} key={key} />,
 		taglist: (schema, key) => <FormtoolsTaglist {...schema} key={key} />,
+		mask: (schema, key) => <FormtoolsMask {...schema} key={key}/>,
 		group: (schema, key) => <FormtoolsGroup title={schema.title} key={key}>
 			<FormtoolsSchema
 				schema={schema.children}
@@ -52,6 +53,7 @@ export function FormtoolsSchema(props: SchemaProps) {
 			} else if (Object.keys(inputs).indexOf(schema.formtool)!==-1) {
 				return inputs[schema.formtool](schema, idx)
 			}
+			return null
 		})}
 	</>
 }
