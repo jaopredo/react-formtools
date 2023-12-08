@@ -1,21 +1,15 @@
-import { FormtoolsForm } from './components'
-import { SubmitHandler, useForm, FieldValues } from 'react-hook-form'
+import { useState } from 'react'
 
-interface UserLogin {
-  email: string,
-  password: string
-}
+import SchemaForm from './SchemaForm'
+import NormalForm from './NormalForm'
 
 export default function App() {
-  const methods = useForm<UserLogin>()
-
-  const handleSubmit: SubmitHandler<UserLogin> = (data: UserLogin) => {
-    console.log(data)
-  }
+  const [ schema, setSchema ] = useState<boolean>(false)
 
   return <div className="App">
-    <FormtoolsForm onSubmit={methods.handleSubmit(handleSubmit)} methods={methods}>
-      <button type="submit">ENVIAR</button>
-    </FormtoolsForm>
+    <button onClick={()=>setSchema(!schema)}>ALTERAR</button>
+
+    { !schema && <NormalForm/> }
+    { schema && <SchemaForm/> }
   </div>
 }
