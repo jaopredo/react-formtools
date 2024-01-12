@@ -1,18 +1,19 @@
 import { FormtoolsForm, FormtoolsSchema } from './components'
+import { SchemaType } from './types/schema'
 
-const schema = [
-	{
-		formtool: 'mask',
-		name: 'cpf',
-		label: 'Digite seu cpf',
-		help: 'Digite seu cpf por favor',
-		placeholder: '000.000.000-00',
-		mask: '000.000.000-00'
-	},
+const schema: SchemaType[] = [
+	// {
+	// 	formtool: 'mask',
+	// 	name: 'cpf',
+	// 	label: 'Digite seu cpf',
+	// 	help: 'Digite seu cpf por favor',
+	// 	placeholder: '000.000.000-00',
+	// 	mask: '000.000.000-00'
+	// },
 	{
 		formtool: 'group',
 		title: 'login',
-		children: [
+		schema: [
 			{
 				formtool: 'email',
 				name: 'email',
@@ -46,14 +47,14 @@ const schema = [
         help: "Selecione seu produto favorito",
         url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
         multiple: true,
-        filterSchema: (value) => ({ product_type: value }),
+        filterSchema: (value: string) => ({ product_type: value }),
 
         mapper: (data: any) => data.map((entry: any) => ({ label: entry.name, value: entry.id }))
 	},
 
 	{
 		formtool: 'select',
-    name: "favoriteFood",
+    	name: "favoriteFood",
 		label: "Comida Favorita: ",
         placeholder: "Selecione aqui a sua comida",
         help: "Selecione sua comida favorita",

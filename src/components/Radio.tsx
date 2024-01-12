@@ -1,14 +1,10 @@
 import Wrapper from './generic/Wrapper'
-import { Children, useState, useEffect } from 'react'
+import { Children, useState, useEffect, MouseEvent } from 'react'
 import { RadioProps, ToggleProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 
 export function FormtoolsRadio(props: RadioProps) {
-	const { register, setValue } = useFormContext()
-
-	function handleOptionClick(value: any) {
-		setValue(props.name, value)
-	}
+	const { register } = useFormContext()
 
 	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		{Children.toArray(props.options.map(opt => <li>
@@ -27,9 +23,9 @@ export function FormtoolsToggle(props: ToggleProps) {
 		setValue(props.name, toggled)
 	}, [])
 
-	function handleToggle() {
+	function handleToggle(e: MouseEvent<HTMLDivElement|HTMLLabelElement>) {
 		if (props.onClick) {
-			props.onClick()
+			props.onClick(e as MouseEvent<HTMLInputElement>)
 		}
 		if (props.turnedOnValue && props.turnedOffValue) {
 			if (toggled == props.turnedOnValue) {
