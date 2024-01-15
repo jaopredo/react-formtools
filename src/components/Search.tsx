@@ -3,12 +3,14 @@ import { SearchProps, OptionType } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext, useFieldArray } from 'react-hook-form'
 import { IoIosArrowDown } from "react-icons/io"
+import { useConfigContextProvider } from '../context/config'
 
 export function FormtoolsSearch (props: SearchProps) {
     const { register, setValue, getValues, control } = useFormContext()  // Coisas do formulário
     const [ showDropdown, setShowDropdown ] = useState<boolean>(false)  // State que diz se mostra ou não as opções
     const [ inputLabel, setInputLabel ] = useState<string>('')  // Mostra o valor presente no input
     const { remove } = useFieldArray({ control, name: props.name})
+    const { themes } = useConfigContextProvider()
 
     // Informações se for um SEARCH MÚLTIPLO
     const [ multipleSelecteds, setMultipleSelecteds ] = useState<{ [id: string|number]: string|undefined }>({})
@@ -49,15 +51,15 @@ export function FormtoolsSearch (props: SearchProps) {
     return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
     aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
         <input type="hidden" {...register(props.name, props.validation)}/>
-        {props.multiple && <ul>
-            {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
+        {props.multiple && <ul className={'formtools-search-list ' + themes['search-list']}>
+            {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li className={'formtools-search-item ' + themes['search-item']} onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
         </ul>}
         <input ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
-        {showDropdown && <ul>
+        {showDropdown && <ul className={'formtools-search-options ' + themes['search-options']}>
             {options && Children.toArray(options?.map(opt =>
                     <FormtoolsOption label={opt.label} clickmeta={() => handleClickOption(opt.label, opt.value)}/>
                 ))}
-            {!options && <p>Carregando...</p>}
+            {!options && <p className={'formtools-search-load ' + themes['search-load']}>Carregando...</p>}
             {props.children}
         </ul>}
     </Wrapper>
@@ -65,13 +67,14 @@ export function FormtoolsSearch (props: SearchProps) {
 
 export function FormtoolsOption({ label, clickmeta }: { label: string, clickmeta: Function }) {
     const [ selected, setSelected ] = useState<boolean>(false)
+    const { themes } = useConfigContextProvider()
 
     function onClick() {
         setSelected(true)
         clickmeta()
     }
 
-    return <li onClick={selected?undefined:onClick}>
+    return <li className={'formtools-search-option ' + themes['search-option']} onClick={selected?undefined:onClick}>
         {label}
     </li>
 }

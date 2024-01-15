@@ -66,7 +66,7 @@ export interface ToggleProps extends DefaultProps, OmitedProps<HTMLInputElement>
 }
 
 
-export interface FileProps extends Omit<DefaultProps, 'beforeicon'>, OmitedProps<HTMLInputElement> {
+export interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 	multiple?: boolean
 }
 
