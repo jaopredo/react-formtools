@@ -47,5 +47,12 @@ export default interface ConfigInterface {
         'select-options'?: string,
         'select-option'?: string,
         'select-load'?: string,
+
+        // Taglist
+        'taglist-tag'?: string,
+        'taglist-option'?: string,
+        'taglist-tags'?: string,
+        'taglist-load'?: string,
+        'taglist-options'?: string,
     }
 }
