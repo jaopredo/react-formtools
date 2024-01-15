@@ -4,7 +4,7 @@ import {
     CheckboxProps,
     SelectProps,
     SearchProps,
-    // MaskProps,
+    MaskProps,
     FileProps,
     RadioProps,
     TaglistProps,
@@ -21,7 +21,7 @@ import {
 	FormtoolsFile,
 	FormtoolsTaglist,
 	FormtoolsGroup,
-	// FormtoolsMask
+	FormtoolsMask
 } from '.'
 
 export function FormtoolsSchema(props: SchemaProps) {
@@ -49,7 +49,7 @@ export function FormtoolsSchema(props: SchemaProps) {
 		toggle: (schema: ToggleProps, key: number) => <FormtoolsToggle {...schema} key={key} />,
 		file: (schema: FileProps, key: number) => <FormtoolsFile {...schema} key={key} />,
 		taglist: (schema: TaglistProps, key: number) => <FormtoolsTaglist {...schema} key={key} />,
-		// mask: (schema: MaskProps, key: number) => <FormtoolsMask {...schema} key={key}/>,
+		mask: (schema: MaskProps, key: number) => <FormtoolsMask {...schema} key={key}/>,
 		group: (schema: {
             title?: string,
             schema: SchemaType[]
