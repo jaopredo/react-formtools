@@ -3,7 +3,7 @@ import {
     CheckboxProps,
     SelectProps,
     SearchProps,
-    // MaskProps,
+    MaskProps,
     FileProps,
     RadioProps,
     TaglistProps,
@@ -28,13 +28,13 @@ export type ElementsTypes = "checkbox" |
 'select' |
 'search' |
 'file' |
-// 'mask' |
+'mask' |
 'radio' |
 'toggle' |
 'taglist' |
 'group'
 
-export type SchemaType  = (InputProps | CheckboxProps | SelectProps | SearchProps | FileProps | RadioProps | TaglistProps | ToggleProps | GroupProps) & {
+export type SchemaType  = (InputProps | CheckboxProps | SelectProps | SearchProps | FileProps | RadioProps | TaglistProps | ToggleProps | MaskProps | GroupProps) & {
     formtool: InputTypes | ElementsTypes
 }
 

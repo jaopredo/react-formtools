@@ -2,14 +2,14 @@ import { FormtoolsForm, FormtoolsSchema } from './components'
 import { SchemaType } from './types/schema'
 
 const schema: SchemaType[] = [
-	// {
-	// 	formtool: 'mask',
-	// 	name: 'cpf',
-	// 	label: 'Digite seu cpf',
-	// 	help: 'Digite seu cpf por favor',
-	// 	placeholder: '000.000.000-00',
-	// 	mask: '000.000.000-00'
-	// },
+	{
+		formtool: 'mask',
+		name: 'cpf',
+		label: 'Digite seu cpf',
+		help: 'Digite seu cpf por favor',
+		placeholder: '000.000.000-00',
+		mask: '000.000.000-00'
+	},
 	{
 		formtool: 'group',
 		title: 'login',
@@ -161,21 +161,21 @@ const schema: SchemaType[] = [
 interface UserLogin {
 	cpf: string,
 
-  email: string,
-  password: string,
-  
-  // product: number,
-  products: number[],
+	email: string,
+	password: string,
+	
+	// product: number,
+	products: number[],
 
-  terms: boolean,
-  orders: string[],
+	terms: boolean,
+	orders: string[],
 
-  best: string,
-  theme: boolean,
+	best: string,
+	theme: boolean,
 
-  image: File,
+	image: File,
 
-  favoriteClasses: string[]
+	favoriteClasses: string[]
 }
 
 export default function SchemaForm() {
