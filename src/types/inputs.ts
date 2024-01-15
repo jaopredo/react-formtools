@@ -1,6 +1,14 @@
 import type { HTMLProps, ReactNode, ReactElement } from 'react'
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
-import type { ReactMaskProps } from 'react-imask'
+import { ReactMaskProps } from 'react-imask'
+
+// import { 
+//     InputMask,
+//     IMaskMixinProps,
+//     ReactMaskOpts,
+//     FactoryOpts,
+//     ReactMaskProps
+//  } from 'react-imask'
 
 
 export interface DefaultProps {
@@ -65,11 +73,11 @@ export interface FileProps extends Omit<DefaultProps, 'beforeicon'>, OmitedProps
 
 export interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLInputElement> {
 	options?: OptionType[],
-	asyncLoad?: () => Promise<OptionType[]>,
+	asyncLoad?: () => Promise<any>,
 	type?: 'typing' | 'async' | 'options',
 }
 
 
-export interface MaskProps extends DefaultProps, OmitedProps<HTMLInputElement>, ReactMaskProps {
-	mask: string,
+export interface MaskProps extends ReactMaskProps<HTMLInputElement>, DefaultProps {
+    mask: string
 }

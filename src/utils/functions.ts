@@ -1,6 +1,6 @@
 import { DefaultProps } from '../types/inputs'
 
-export function jaroWinklerSimilarity(str1, str2) {
+export function jaroWinklerSimilarity(str1: string, str2: string) {
     const jaroSimilarity = jaroSimilarityCoefficient(str1, str2);
 
     // Constantes para ajuste no índice de Jaro-Winkler
@@ -24,7 +24,7 @@ export function jaroWinklerSimilarity(str1, str2) {
 }
 
 // Função auxiliar para calcular o coeficiente de similaridade de Jaro
-function jaroSimilarityCoefficient(str1, str2) {
+function jaroSimilarityCoefficient(str1: string, str2: string) {
     const matchWindow = Math.floor(Math.max(str1.length, str2.length) / 2) - 1;
     const matches1 = getCharacterMatches(str1, str2, matchWindow);
     const matches2 = getCharacterMatches(str2, str1, matchWindow);
@@ -45,8 +45,8 @@ function jaroSimilarityCoefficient(str1, str2) {
 }
 
 // Função auxiliar para encontrar caracteres correspondentes em uma janela
-function getCharacterMatches(str1, str2, matchWindow) {
-    const matches = [];
+function getCharacterMatches(str1: string, str2: string, matchWindow: number): number[] {
+    const matches: number[] = [];
 
     for (let i = 0; i < str1.length; i++) {
         const start = Math.max(0, i - matchWindow);
@@ -64,7 +64,7 @@ function getCharacterMatches(str1, str2, matchWindow) {
 }
 
 // Função auxiliar para contar transposições entre caracteres correspondentes
-function countTranspositions(matches1, matches2) {
+function countTranspositions(matches1: number[], matches2: number[]) {
     let transpositions = 0;
 
     for (let i = 0; i < matches1.length; i++) {

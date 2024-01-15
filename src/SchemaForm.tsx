@@ -1,6 +1,7 @@
 import { FormtoolsForm, FormtoolsSchema } from './components'
+import { SchemaType } from './types/schema'
 
-const schema = [
+const schema: SchemaType[] = [
 	{
 		formtool: 'mask',
 		name: 'cpf',
@@ -12,7 +13,7 @@ const schema = [
 	{
 		formtool: 'group',
 		title: 'login',
-		children: [
+		schema: [
 			{
 				formtool: 'email',
 				name: 'email',
@@ -46,14 +47,14 @@ const schema = [
         help: "Selecione seu produto favorito",
         url: 'http://makeup-api.herokuapp.com/api/v1/products.json',
         multiple: true,
-        filterSchema: (value) => ({ product_type: value }),
+        filterSchema: (value: string) => ({ product_type: value }),
 
         mapper: (data: any) => data.map((entry: any) => ({ label: entry.name, value: entry.id }))
 	},
 
 	{
 		formtool: 'select',
-    name: "favoriteFood",
+    	name: "favoriteFood",
 		label: "Comida Favorita: ",
         placeholder: "Selecione aqui a sua comida",
         help: "Selecione sua comida favorita",
@@ -160,21 +161,21 @@ const schema = [
 interface UserLogin {
 	cpf: string,
 
-  email: string,
-  password: string,
-  
-  // product: number,
-  products: number[],
+	email: string,
+	password: string,
+	
+	// product: number,
+	products: number[],
 
-  terms: boolean,
-  orders: string[],
+	terms: boolean,
+	orders: string[],
 
-  best: string,
-  theme: boolean,
+	best: string,
+	theme: boolean,
 
-  image: File,
+	image: File,
 
-  favoriteClasses: string[]
+	favoriteClasses: string[]
 }
 
 export default function SchemaForm() {

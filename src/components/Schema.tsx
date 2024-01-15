@@ -1,4 +1,15 @@
-import { SchemaProps } from '../types/schema'
+import { SchemaProps, SchemaType } from '../types/schema'
+import {
+    InputProps,
+    CheckboxProps,
+    SelectProps,
+    SearchProps,
+    MaskProps,
+    FileProps,
+    RadioProps,
+    TaglistProps,
+    ToggleProps
+} from '../types/inputs'
 import {
 	FormtoolsInput,
 	FormtoolsPassword,
@@ -30,18 +41,21 @@ export function FormtoolsSchema(props: SchemaProps) {
 	]
 
 	const inputs = {
-		password: (schema, key) => <FormtoolsPassword {...schema} key={key}/>,
-		search: (schema, key) => <FormtoolsSearch {...schema} key={key} />,
-		select: (schema, key) => <FormtoolsSelect {...schema} key={key} />,
-		checkbox: (schema, key) => <FormtoolsCheckbox {...schema} key={key} />,
-		radio: (schema, key) => <FormtoolsRadio {...schema} key={key} />,
-		toggle: (schema, key) => <FormtoolsToggle {...schema} key={key} />,
-		file: (schema, key) => <FormtoolsFile {...schema} key={key} />,
-		taglist: (schema, key) => <FormtoolsTaglist {...schema} key={key} />,
-		mask: (schema, key) => <FormtoolsMask {...schema} key={key}/>,
-		group: (schema, key) => <FormtoolsGroup title={schema.title} key={key}>
+		password: (schema: InputProps, key: number) => <FormtoolsPassword {...schema as any} key={key}/>,
+		search: (schema: SearchProps, key: number) => <FormtoolsSearch {...schema} key={key} />,
+		select: (schema: SelectProps, key: number) => <FormtoolsSelect {...schema} key={key} />,
+		checkbox: (schema: CheckboxProps, key: number) => <FormtoolsCheckbox {...schema} key={key} />,
+		radio: (schema: RadioProps, key: number) => <FormtoolsRadio {...schema} key={key} />,
+		toggle: (schema: ToggleProps, key: number) => <FormtoolsToggle {...schema} key={key} />,
+		file: (schema: FileProps, key: number) => <FormtoolsFile {...schema} key={key} />,
+		taglist: (schema: TaglistProps, key: number) => <FormtoolsTaglist {...schema} key={key} />,
+		mask: (schema: MaskProps, key: number) => <FormtoolsMask {...schema} key={key}/>,
+		group: (schema: {
+            title?: string,
+            schema: SchemaType[]
+        }, key: number) => <FormtoolsGroup title={schema.title} key={key}>
 			<FormtoolsSchema
-				schema={schema.children}
+				schema={schema.schema}
 			/>
 		</FormtoolsGroup>
 	}
@@ -49,9 +63,12 @@ export function FormtoolsSchema(props: SchemaProps) {
 	return <>
 		{props.schema.map((schema, idx) => {
 			if (inputTypes.indexOf(schema.formtool)!==-1) {
-				return <FormtoolsInput {...schema} type={schema.formtool} key={idx} />
+				return <FormtoolsInput {...schema as any} type={schema.formtool} key={idx} />
 			} else if (Object.keys(inputs).indexOf(schema.formtool)!==-1) {
-				return inputs[schema.formtool](schema, idx)
+				return inputs[schema.formtool as keyof typeof inputs](
+					schema as any,
+					idx
+				)
 			}
 			return null
 		})}
