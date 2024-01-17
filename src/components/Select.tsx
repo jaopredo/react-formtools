@@ -3,11 +3,13 @@ import { SelectProps, OptionType } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'
 import { IoIosArrowDown } from "react-icons/io"
+import { useConfigContextProvider } from '../context/config'
 
 export function FormtoolsSelect (props: SelectProps) {
 	const { register, setValue } = useFormContext()
 	const [ showDropdown, setShowDropdown ] = useState<boolean>(false)
 	const [ inputLabel, setInputLabel ] = useState<string>('')
+	const { themes } = useConfigContextProvider()
 
 	const [ options, setOptions ] = useState<OptionType[]|undefined>(props.options)
 
@@ -23,12 +25,12 @@ export function FormtoolsSelect (props: SelectProps) {
 		}
 	}, [])
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
+	return <Wrapper family='select' name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
 	aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
-		<input placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
-		{showDropdown && <ul>
-			{options && Children.toArray(options?.map(opt => <li onClick={() => handleClickOption(opt.label, opt.value)}>{opt.label}</li>))}
-			{!options && <p>Carregando...</p>}
+		<input className={'formtools-input ' + themes.input} placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
+		{showDropdown && <ul className={'formtools-select-options ' + themes['select-options']}>
+			{options && Children.toArray(options?.map(opt => <li className={'formtools-select-option ' + themes['select-option']} onClick={() => handleClickOption(opt.label, opt.value)}>{opt.label}</li>))}
+			{!options && <p className={'formtools-select-load ' + themes['select-load']}>Carregando...</p>}
 			{props.children}
 		</ul>}
 	</Wrapper>

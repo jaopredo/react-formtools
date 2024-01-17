@@ -1,6 +1,7 @@
 import type { HTMLProps, ReactNode, ReactElement } from 'react'
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
 import { ReactMaskProps } from 'react-imask'
+import { ElementsTypes } from './schema'
 
 // import { 
 //     InputMask,
@@ -23,11 +24,11 @@ type OmitedProps<T> = Omit<HTMLProps<T>, keyof DefaultProps>
 
 export interface WrapperProps extends DefaultProps {
 	children: ReactNode,
+	family: ElementsTypes | 'input' | 'password'
 }
 
 
-export interface InputProps extends DefaultProps, OmitedProps<HTMLInputElement> {
-}
+export type InputProps = DefaultProps & OmitedProps<HTMLInputElement>
 
 
 export type OptionType = {
@@ -66,7 +67,7 @@ export interface ToggleProps extends DefaultProps, OmitedProps<HTMLInputElement>
 }
 
 
-export interface FileProps extends Omit<DefaultProps, 'beforeicon'>, OmitedProps<HTMLInputElement> {
+export interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 	multiple?: boolean
 }
 
