@@ -8,7 +8,7 @@ export const FormtoolsInput = forwardRef<HTMLInputElement, InputProps>(function 
 	const { register } = useFormContext()
 	const { themes } = useConfigContextProvider()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper family='input' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		<input {...props} {...register(props.name, props.validation)} className={'formtools-input ' + themes.input} />
 	</Wrapper>
 })

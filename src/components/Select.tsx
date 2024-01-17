@@ -25,7 +25,7 @@ export function FormtoolsSelect (props: SelectProps) {
 		}
 	}, [])
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
+	return <Wrapper family='select' name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
 	aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
 		<input className={'formtools-input ' + themes.input} placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
 		{showDropdown && <ul className={'formtools-select-options ' + themes['select-options']}>

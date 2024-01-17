@@ -8,7 +8,7 @@ export function FormtoolsCheckbox(props: CheckboxProps) {
 	const { register } = useFormContext()
 	const { themes } = useConfigContextProvider()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper family='checkbox' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		{ !props.options && <>
 			<input className={'formtools-checkbox ' + themes.checkbox} type="checkbox" {...register(props.name, props.validation)} id={props.name} />
 			<label className={'formtools-checkbox-label ' + themes['checkbox-label']} htmlFor={props.name}>{props.placeholder}</label>

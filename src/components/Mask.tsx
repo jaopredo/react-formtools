@@ -10,7 +10,7 @@ export function FormtoolsMask(props: MaskProps) {
     const { control } = useFormContext()
     const { themes } = useConfigContextProvider()
 
-    return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+    return <Wrapper family='mask' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
         <Controller
             control={control}
             name={props.name}

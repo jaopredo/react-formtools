@@ -55,7 +55,7 @@ export function FormtoolsTaglist(props: TaglistProps) {
         }
 	}
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon} 
+	return <Wrapper family='taglist' name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon} 
 	aftericon={<IoIosArrowDown onClick={()=>setShowOptions(!showOptions)}/>}>
 		<ul className={'formtools-taglist ' + themes['taglist-tags']}>
 			{tags.map((opt, idx) => opt && <Tag {...opt} setTags={setTags} tags={tags} key={idx}/>)}
@@ -90,10 +90,7 @@ function Option({ label, value, tags, setTags, editedOptions }: {editedOptions: 
 		}
 	}
 
-	return <li className={'formtools-taglist-option ' + themes['taglist-option']} onClick={onClick}
-		style={{
-			color: selected?'blue':'black'
-		}}
+	return <li className={'formtools-taglist-option ' + themes['taglist-option'] + ' ' + (selected?('formtools-taglist-option-selected ' + themes['taglist-option-selected']):'')} onClick={onClick}
 	>{label}</li>
 }
 

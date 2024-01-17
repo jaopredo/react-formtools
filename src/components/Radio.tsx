@@ -9,7 +9,7 @@ export function FormtoolsRadio(props: RadioProps) {
 	const { register } = useFormContext()
 	const { themes } = useConfigContextProvider()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper family='radio' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		<ul className={'formtools-radio-list ' + themes['radio-list']}>
 			{Children.toArray(props.options.map(opt => <li className={'formtools-radio-item ' + themes['radio-item']}>
 				<label className={'formtools-radio-label ' + themes['radio-label']} htmlFor={opt.value}>{opt.label}</label>
@@ -69,7 +69,7 @@ export function FormtoolsToggle(props: ToggleProps) {
 		setToggled(!toggled)
 	}
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper family='toggle' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		<Toggle
 			isTurnedOn={toggled}
 			onClick={handleToggle}

@@ -48,13 +48,13 @@ export function FormtoolsSearch (props: SearchProps) {
         getData().then(opts => setOptions(opts))
     }, [inputLabel])
 
-    return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
+    return <Wrapper family='search' name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
     aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
         <input type="hidden" {...register(props.name, props.validation)}/>
         {props.multiple && <ul className={'formtools-search-list ' + themes['search-list']}>
             {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li className={'formtools-search-item ' + themes['search-item']} onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
         </ul>}
-        <input ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
+        <input className={'formtools-search ' + themes.input} ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
         {showDropdown && <ul className={'formtools-search-options ' + themes['search-options']}>
             {options && Children.toArray(options?.map(opt =>
                     <FormtoolsOption label={opt.label} clickmeta={() => handleClickOption(opt.label, opt.value)}/>

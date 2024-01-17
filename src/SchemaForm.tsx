@@ -1,6 +1,8 @@
 import { FormtoolsForm, FormtoolsSchema } from './components'
 import { SchemaType } from './types/schema'
 
+import { IoDocumentOutline } from "react-icons/io5"
+
 const schema: SchemaType[] = [
 	{
 		formtool: 'mask',
@@ -8,7 +10,7 @@ const schema: SchemaType[] = [
 		label: 'Digite seu cpf',
 		help: 'Digite seu cpf por favor',
 		placeholder: '000.000.000-00',
-		mask: '000.000.000-00'
+		mask: '000.000.000-00',
 	},
 	{
 		formtool: 'group',
@@ -20,7 +22,10 @@ const schema: SchemaType[] = [
 				label: 'Email: ',
 				help: 'Digite o seu email',
 				validation: {
-					required: true
+					required: {
+						value: true,
+						message: 'Digite seu email, cara!'
+					},
 				}
 			},
 			{
@@ -125,6 +130,8 @@ const schema: SchemaType[] = [
         placeholder: "Selecione uma foto",
         help: "Envie uma foto sua",
         name: "image",
+		aftericon: <IoDocumentOutline/>,
+		multiple: true,
 	},
 
 	{

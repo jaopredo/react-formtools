@@ -13,7 +13,7 @@ export const FormtoolsPassword = forwardRef<HTMLInputElement, InputProps>(functi
 		setShow(!show)
 	}
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
+	return <Wrapper family='password' name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
 		aftericon={
 			show?<IoMdEye onClick={onPasswordIconClick}/>:<IoMdEyeOff onClick={onPasswordIconClick}/>
 		}

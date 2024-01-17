@@ -1,13 +1,13 @@
 
 export default interface ConfigInterface {
     themes: {
-        container: string,
-        label: string,
-        insider: string,
-        'before-icon': string,
-        'after-icon': string,
-        help: string,
-        errors: string,
+        container?: string,
+        label?: string,
+        insider?: string,
+        'before-icon'?: string,
+        'after-icon'?: string,
+        help?: string,
+        errors?: string,
 
         input?: string,
 
@@ -54,5 +54,8 @@ export default interface ConfigInterface {
         'taglist-tags'?: string,
         'taglist-load'?: string,
         'taglist-options'?: string,
+        'taglist-option-selected'?: string,
+
+        [x: string]: string | undefined,
     }
 }
