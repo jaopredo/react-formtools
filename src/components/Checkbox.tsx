@@ -4,7 +4,7 @@ import { CheckboxProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 import { useConfigContextProvider } from '../context/config'
 
-export function FormtoolsCheckbox(props: CheckboxProps) {
+export function FormtoolsCheckbox(props: CheckboxProps, ref: string) {
 	const { register } = useFormContext()
 	const { themes } = useConfigContextProvider()
 

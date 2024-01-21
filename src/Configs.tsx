@@ -6,8 +6,8 @@ export function useAppConfig(): ConfigInterface {
             container: 'flex justify-center gap-1 flex-col',
             label: 'font-bold',
             insider: 'group flex items-center gap-1 relative w-fit rounded-md p-1',
-            "after-icon": 'text-ls',
-            "before-icon": 'text-ls hover:cursor-pointer',
+            "after-icon": 'text-xl text-indigo-500 hover:cursor-pointer',
+            "before-icon": 'text-xl text-indigo-500 hover:cursor-pointer',
             errors: 'text-sm text-rose-400 font-bold',
             help: 'text-gray-600 text-sm',
     

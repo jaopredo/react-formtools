@@ -1,38 +1,17 @@
-import { FormtoolsForm, FormtoolsSchema } from './components'
-import { SchemaType } from './types/schema'
-
-import { IoDocumentOutline } from "react-icons/io5"
-
-const schema: SchemaType[] = [
-	{
-		formtool: 'custominput',
-		name: 'cpf',
-		teste: 'Apenas um teste',
-		label: 'Digite seu cpf',
-		help: 'Digite seu cpf por favor',
-		placeholder: '000.000.000-00',
-		mask: '000.000.000-00',
-	},
-]
+import {
+	FormtoolsForm,
+	FormtoolsCheckbox
+} from './components'
 
 interface UserLogin {
-	cpf: string,
+	// cpf: string,
 
-	email: string,
-	password: string,
-	
-	// product: number,
-	products: number[],
-
-	terms: boolean,
-	orders: string[],
-
-	best: string,
-	theme: boolean,
-
-	image: File,
-
-	favoriteClasses: string[]
+	// email: string,
+	// password: string,
+	'licence-terms': boolean,
+	'best': {
+		[x: string]: boolean
+	}
 }
 
 export default function SchemaForm() {
@@ -41,8 +20,19 @@ export default function SchemaForm() {
 	}
 
 	return <FormtoolsForm<UserLogin> onSubmit={onSubmit}>
-		<FormtoolsSchema
-			schema={schema}
+		<FormtoolsCheckbox
+			label="Termos e Condições"
+			name='licence-terms'
+			placeholder='Eu li e aceito os termos e condições'
+		/>
+		<FormtoolsCheckbox
+			label='Escolha o melhor'
+			name='best'
+			options={[
+				{ label: 'Naruto', value: 'naruto' },
+				{ label: 'Sasuke', value: 'sasuke' },
+				{ label: 'Luffy', value: 'luffy' }
+			]}
 		/>
 
 		<button type="submit">ENVIAR</button>

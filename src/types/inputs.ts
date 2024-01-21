@@ -30,6 +30,10 @@ export interface WrapperProps extends DefaultProps {
 
 export type InputProps = DefaultProps & OmitedProps<HTMLInputElement>
 
+export interface PasswordProps extends Omit<DefaultProps, 'aftericon'> {
+	stateshowicon: Function,
+	statehideicon: Function
+}
 
 export type OptionType = {
 	label: string,
