@@ -34,8 +34,8 @@ export type ElementsTypes = "checkbox" |
 'taglist' |
 'group'
 
-export type SchemaType  = (InputProps | CheckboxProps | SelectProps | SearchProps | FileProps | RadioProps | TaglistProps | ToggleProps | MaskProps | GroupProps) & {
-    formtool: InputTypes | ElementsTypes
+export type SchemaType  = (InputProps | CheckboxProps | SelectProps | SearchProps | FileProps | RadioProps | TaglistProps | ToggleProps | MaskProps | GroupProps | { [x: string]: any }) & {
+    formtool: InputTypes | ElementsTypes | string
 }
 
 export type GroupProps = {
