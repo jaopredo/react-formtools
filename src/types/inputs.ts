@@ -24,12 +24,16 @@ type OmitedProps<T> = Omit<HTMLProps<T>, keyof DefaultProps>
 
 export interface WrapperProps extends DefaultProps {
 	children: ReactNode,
-	family: ElementsTypes | 'input' | 'password'
+	family: ElementsTypes | 'input' | 'password' | string
 }
 
 
 export type InputProps = DefaultProps & OmitedProps<HTMLInputElement>
 
+export interface PasswordProps extends Omit<DefaultProps, 'aftericon'> {
+	stateshowicon: Function,
+	statehideicon: Function
+}
 
 export type OptionType = {
 	label: string,
