@@ -2,18 +2,16 @@ import Wrapper from './generic/Wrapper'
 import { Children, useState, useEffect, MouseEvent } from 'react'
 import { RadioProps, ToggleProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
-import { useConfigContextProvider } from '../context/config'
 import styled from 'styled-components'
 
 export function FormtoolsRadio(props: RadioProps) {
 	const { register } = useFormContext()
-	const { themes } = useConfigContextProvider()
 
-	return <Wrapper family='radio' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
-		<ul className={'formtools-radio-list ' + themes['radio-list']}>
-			{Children.toArray(props.options.map(opt => <li className={'formtools-radio-item ' + themes['radio-item']}>
-				<label className={'formtools-radio-label ' + themes['radio-label']} htmlFor={opt.value}>{opt.label}</label>
-				<input className={'formtools-radio' + themes.radio} type="radio" {...register(props.name, props.validation)} id={opt.value} value={opt.value}/>
+	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+		<ul className={'formtools-radio-list'}>
+			{Children.toArray(props.options.map(opt => <li className={'formtools-radio-item'}>
+				<label className={'formtools-radio-label'} htmlFor={opt.value}>{opt.label}</label>
+				<input className={'formtools-radio'} type="radio" {...register(props.name, props.validation)} id={opt.value} value={opt.value}/>
 			</li>))}
 		</ul>
 	</Wrapper>
@@ -47,7 +45,6 @@ const Toggle = styled.div<{ isTurnedOn: boolean }>`
 export function FormtoolsToggle(props: ToggleProps) {
 	const { setValue } = useFormContext()
 	const [ toggled, setToggled ] = useState<any>(props.toggled?(props.turnedOnValue||true):(props.turnedOffValue||false))  // Diz se está ligado ou não
-	const { themes } = useConfigContextProvider()
 
 	useEffect(() => {
 		setValue(props.name, toggled)
@@ -69,11 +66,11 @@ export function FormtoolsToggle(props: ToggleProps) {
 		setToggled(!toggled)
 	}
 
-	return <Wrapper family='toggle' name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
 		<Toggle
 			isTurnedOn={toggled}
 			onClick={handleToggle}
-			className={'formtools-toggle '+themes.toggle}
-		/> <label className={'formtools-toggle-label ' + themes['toggle-label']} onClick={handleToggle} htmlFor={props.name}>{props.placeholder}</label>
+			className={'formtools-toggle'}
+		/> <label className={'formtools-toggle-label'} onClick={handleToggle} htmlFor={props.name}>{props.placeholder}</label>
 	</Wrapper>
 }
