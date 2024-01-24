@@ -1,17 +1,5 @@
-export default interface ConfigInterface {
+export interface ConfigInterface {
     inputTypes?: string[]
-    components?: {
-        password: Function,
-		search: Function,
-		select: Function,
-		checkbox: Function,
-		radio: Function,
-		toggle: Function,
-		file: Function,
-		taglist: Function,
-		mask: Function,
-		group: Function
-    }
     customComponents?: {
         [x: string]: Function
     }
