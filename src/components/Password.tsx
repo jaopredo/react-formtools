@@ -1,4 +1,4 @@
-import { forwardRef, useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { PasswordProps } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'

@@ -1,7 +1,7 @@
 import Wrapper from './generic/Wrapper'
 import { TaglistProps, OptionType } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
-import { useRef, useState, useEffect, KeyboardEvent } from 'react'
+import React, { useRef, useState, useEffect, KeyboardEvent } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
 import { jaroWinklerSimilarity } from '../utils/functions'
 

@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React, { forwardRef } from 'react'
 import { InputProps } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'

@@ -1,7 +1,7 @@
 import Wrapper from './generic/Wrapper'
 import { FileProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
-import { useState, Children } from 'react'
+import React, { useState, Children } from 'react'
 
 export function FormtoolsFile({ name, label, help, aftericon, beforeicon, validation, placeholder, ...rest }: FileProps) {
 	const { register } = useFormContext()

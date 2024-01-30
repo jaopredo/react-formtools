@@ -1,6 +1,6 @@
 import { FormProvider, FieldValues, useForm, SubmitHandler } from 'react-hook-form'
 import type { FormtoolsFormProps } from '../types/form'
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 
 export function FormtoolsForm<T extends FieldValues>({ children, onSubmit, setMethods, multipart }: FormtoolsFormProps<T>) {
 	const methods = useForm<T>()

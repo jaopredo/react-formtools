@@ -1,5 +1,5 @@
 import { SchemaProps } from '../types/schema'
-import { Children } from 'react'
+import React, { Children } from 'react'
 import {
 	FormtoolsInput,
     FormtoolsPassword,
