@@ -22,10 +22,10 @@ export function FormtoolsTaglist(props: TaglistProps) {
 	useEffect(() => {
 		if (props.asyncLoad) {
 			setLoading(true)
-			props.asyncLoad().then(getter=>getter().then((resp: any) => {
+			props.asyncLoad().then(resp=>{
 				setEditedOptions(resp)
 				setLoading(false)
-			}))
+			})
 		}
 	}, [])
 
@@ -33,7 +33,7 @@ export function FormtoolsTaglist(props: TaglistProps) {
 	/* QUANDO EU CLICAR NO ENTER OU NA VIRGULA */
 	function handleKeyUp(e: KeyboardEvent<HTMLInputElement>) {
 		const { value } = e.currentTarget
-        if (props.type === 'typing' && (e.key === 'Enter' || e.key === ',')) {
+        if (props.type === 'typing' || props.type==='async' && (e.key === 'Enter' || e.key === ',')) {
             let newValue = value.slice(-1)===','?value.slice(0,-1):value
             setTags([...tags, {value: newValue, label: newValue}])
             e.currentTarget.value = ""
