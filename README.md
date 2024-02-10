@@ -402,6 +402,14 @@ Without async load
 With async load
 ![Async Select](https://i.ibb.co/nMfHcgL/Select-Async.png)
 
+#### Types
+```ts
+interface SelectProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
+    options?: OptionType[],
+    asyncLoad?: () => Promise<any>
+}
+```
+
 
 ### Taglist Component
 The taglist component is similar to the **select component**, but it is possible to **not pass any option**
@@ -422,3 +430,67 @@ Async Structure
 
 Typing Structure
 ![Taglist Typing](https://i.ibb.co/gWgFzWk/Taglist-Typing.png)
+
+#### Types
+```ts
+interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
+    options?: OptionType[],
+    asyncLoad?: () => Promise<any>,
+    type?: 'typing' | 'async' | 'options',
+}
+```
+
+
+### Search Component
+The search component is similar to the select component, but you can type into it, and as you type something, the options show will be filtered.
+
+| Property | Type | Description |
+| -------- | ---- | ----------- |
+| url | string | The url that the request will be sent |
+| multiple | boolean | Tells if can select more than one option |
+| mapper | Function | This functions receives request values, needs to return a OptionType, use it to filter the correct properties from the API request response, for example, if your api return the entry name as "name", you'll return something like: { label: entry.name, ... } |
+| filterSchema | Function | This functions will filter the string typed on the search input. It needs to return a object that will be turned into the url parameters, so make a object that will be read by the url and filter the options correctly |
+
+#### Example
+This is workers.json
+```json
+[
+    { "name": "João Pedro", "id": 1 },
+    { "name": "Márcio", "id": 2 },
+    { "name": "Gabriel", "id": 3 }
+]
+```
+The `http://localhost:3000/workers` returns this same json, and the `?name_like=xxx` parameter will return the workers with the the name property like the passed.
+
+```tsx
+<FormtoolsSearch
+    label="Worker"
+    name="worker"
+
+    url="http://localhost:3000/workers"
+    mapper={function (worker: { name: string, id: number }) {
+        return {
+            label: worker.name,
+            value: worker.id
+        }
+    }}
+    filterSchema={function (value: string) {
+        return {
+            name_like: value
+        }
+    }}
+/>
+```
+
+#### Structure
+![Search Component](https://i.ibb.co/jgwXmgk/Search-Input.png)
+
+#### Types
+```ts
+interface SearchProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
+    url: string,
+    filterSchema: (value: any) => string | string[][] | Record<string, string> | URLSearchParams | undefined,
+    mapper?: (data: any) => OptionType[],
+    multiple?: boolean
+}
+```
