@@ -494,3 +494,68 @@ interface SearchProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HT
     multiple?: boolean
 }
 ```
+
+
+### Group Component
+This component just wraps other components as a group, you can name a title to it
+
+```tsx
+<FormtoolsGroup title="Login">
+    ...
+</FormtoolsGroup>
+```
+
+#### Structure
+![Group Component](https://i.ibb.co/GkNRPH7/Group.png)
+
+
+## Schema
+Schema is a special component. It works using a JSON object, turning it into a functional form.
+```tsx
+<FormtoolsSchema
+    schema={[
+        {
+            formtool: 'email',
+            name: 'email',
+            label: 'Email',
+            help: 'Insert your email'
+        },
+        {
+            formtool: 'password',
+            name: 'password',
+            label: 'password',
+            help: 'Insert your password',
+            validation: {
+                minLength: {
+                    value: 8,
+                    message: "You password needs to have at least 8 characters"
+                }
+            }
+        }
+    ]}
+>
+```
+
+This code is the same as
+
+```tsx
+<FormtoolsInput
+    type="email"
+    name="email"
+    label="Email"
+    help="Insert your email"
+/>
+<FormtoolsPassword
+    name="password"
+    label="password"
+    help="Insert your password"
+    validation={{
+        minLength: {
+            value: 8,
+            message: "You password needs to have at least 8 characters"
+        }
+    }}
+/>
+```
+
+The group component also accepts the `schema` property (When is into the json object, the normal JSX component doesn't accepts it)
