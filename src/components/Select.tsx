@@ -19,7 +19,7 @@ export function FormtoolsSelect (props: SelectProps) {
 
 	useEffect(() => {
 		if (props.asyncLoad) {
-			props.asyncLoad().then(resp => resp().then((r: OptionType[]) => setOptions(r)))
+			props.asyncLoad().then(resp => setOptions(resp))
 		}
 	}, [])
 

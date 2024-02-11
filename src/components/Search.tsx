@@ -52,7 +52,7 @@ export function FormtoolsSearch (props: SearchProps) {
         {props.multiple && <ul className={'formtools-search-list'}>
             {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li className={'formtools-search-item'} onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
         </ul>}
-        <input className={'formtools-search'} ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
+        <input className={'formtools-input'} ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
         {showDropdown && <ul className={'formtools-search-options'}>
             {options && Children.toArray(options?.map(opt =>
                     <FormtoolsOption label={opt.label} clickmeta={() => handleClickOption(opt.label, opt.value)}/>
