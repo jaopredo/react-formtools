@@ -2,15 +2,6 @@ import React, { createContext, useContext } from "react"
 import { ConfigInterface } from "../types/config"
 
 const defaultConfigContextValue: ConfigInterface = {
-    themes: {
-        container: '',
-        label: '',
-        insider: '',
-        'before-icon': '',
-        'after-icon': '',
-        help: '',
-        errors: ''
-    },
     inputTypes: [
 		'email',
 		"text",

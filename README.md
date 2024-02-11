@@ -559,3 +559,64 @@ This code is the same as
 ```
 
 The group component also accepts the `schema` property (When is into the json object, the normal JSX component doesn't accepts it)
+
+
+### Custom Components
+When you are creating your form, you might not find any input here useful, so you decide creating your own input! That is very very easy by the way. And another great tip: **Your custom component can be inserted in the schema, so it can be passed as a JSON**.
+
+#### 1. How to create a custom component?
+First, you'll create your file exporting your component. Next, you'll import the **useFormContext** from the **react-hook-form** library. This function will allow you to register your input into the form. Next, you will create your input and register it with the name and the validation you would like.
+This example shows a component that will receive the name and the validation by properties, and have the same default structure as the other components, using the **Wrapper** component provided.
+
+```tsx
+import React from 'react'
+import {
+    Wrapper,
+    DefaultProps
+} from 'react-formtools'
+import { useFormContext } from 'react-hook-form'
+
+interface TestProps extends DefaultProps {
+    testprop: string
+}
+
+export default function Test(props: TestProps) {
+    const { register } = useFormContext()
+
+    return <Wrapper {...props}>
+        <input {...register(props.name, props.validation)}/>
+    </Wrapper>
+}
+```
+
+#### 2. Now, how can I make it possible to pass it on the Schema?
+This is very simple too. You need to pass a configuration provider, provided by the library.
+`import { ConfigContextProvider } from 'react-formtools'`
+This provider receives some informations that will be used by **all forms nested**. The configuration we are looking for is `customComponents`. You will also like to use the `createCustomComponent` function, because the schema uses a specific structure, nothing complex, but you will like for organization and for future updates
+
+```tsx
+import Test from './components/Test'
+import { ConfigContextProvider, ConfigInterface, createCustomComponent } from 'react-formtools'
+
+const config: ConfigInterface = {
+    customComponents: {
+        test: createCustomComponent(Test)
+    }
+}
+
+...
+<ConfigContextProvider config={config}>
+    <FormtoolsForm onSubmit={data => console.log(data)}>
+        <FormtoolsSchema
+            schema={[
+                {
+                    formtool: 'test',
+                    name: 'test',
+                    label: 'This is a test component'
+                }
+            ]}
+        />
+    </FormtoolsForm>
+</ConfigContextProvider>
+...
+```
