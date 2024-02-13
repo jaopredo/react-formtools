@@ -1,5 +1,5 @@
 # React Formtools
-Note: A website for this library is being made, soon it will be published here ;)
+Note: A website for this library is being made, soon it will be published here and soon we will have a page if you want to donate to the project.
 
 ## What is it?
 React formtools is an GUI library made to make life of devs easier with forms.
