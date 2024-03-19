@@ -7,6 +7,22 @@ The main problem of making forms is the amount of code that is needed to make a 
 Even with frameworks like [react-hook-form](https://react-hook-form.com/), forms can be a pain in the ass!
 Thinking on this type of situations, I made a library with ready-to-go components, like inputs, selects, and masks inputs, and you just need to pass some args to them!
 
+## Donate <3
+This project is made by one person, if you want to give some support, you can donate for the project! No minimum amount is required, if you want to donate only $0.1, feel free!
+
+## Pix
+You can donate using our pix key
+
+**joao.profissional.45@gmail.com**
+*Account Infos*
+```
+Name: João Pedro Jerônimo de Oliveira
+Bank: Banco do Brasil S A
+```
+
+or the QR Code bellow
+![QR CODE](https://i.ibb.co/hdrykKG/FORMTOOLS-QR-CODE-PAYMENT.jpg)
+
 ## Warning
 This library still on develop, so if you find a bug, or have any suggestion to contribute on the project, try making an issue, we will see it for sure :D
 
