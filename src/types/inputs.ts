@@ -38,10 +38,11 @@ export type OptionType = {
 	value: any
 }
 
-export interface SelectProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
-	options?: OptionType[],
-	asyncLoad?: () => Promise<any>
-}
+export type SelectProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLSelectElement> & ({
+	options: OptionType[]
+} | {
+	asyncLoad: () => Promise<any>
+})
 
 
 export interface SearchProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
@@ -74,11 +75,15 @@ export interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 }
 
 
-export interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLInputElement> {
-	options?: OptionType[],
-	asyncLoad?: () => Promise<any>,
-	type?: 'typing' | 'async' | 'options',
-}
+export type TaglistProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLInputElement> & ({
+	type: 'options'
+	options: OptionType[]
+} | {
+    type: 'async'
+	asyncLoad: () => Promise<any>
+} | {
+    type: 'typing'
+})
 
 
 export interface MaskProps extends ReactMaskProps<HTMLInputElement>, DefaultProps {

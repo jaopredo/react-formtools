@@ -18,7 +18,7 @@ const schema: SchemaType[] = [
     {
         formtool: 'text',
         label: 'Teste',
-        name: 'test'
+        name: 'teste',
     }
 ]
 
