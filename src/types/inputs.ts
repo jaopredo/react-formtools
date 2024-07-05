@@ -38,8 +38,9 @@ export type OptionType = {
 	value: any
 }
 
-export interface SelectProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
-	options?: OptionType[],
+export type SelectProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLSelectElement> & {
+	options: OptionType[]
+} & {
 	asyncLoad?: () => Promise<any>
 }
 

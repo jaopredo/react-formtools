@@ -16,9 +16,9 @@ type Story = StoryObj<SchemaProps>
  
 const schema: SchemaType[] = [
     {
-        formtool: 'text',
+        formtool: 'select',
         label: 'Teste',
-        name: 'test'
+        name: 'teste',
     }
 ]
 

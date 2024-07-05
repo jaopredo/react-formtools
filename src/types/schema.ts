@@ -11,6 +11,7 @@ import {
     PasswordProps
 } from '../types/inputs'
 
+/* TIPOS DO INPUT */
 export type InputTypes = 'email'|
 "text"|
 "number"|
@@ -25,6 +26,11 @@ export type InputTypes = 'email'|
 "tel"|
 'password' 
 
+export interface InputSchemaProps extends InputProps {
+    formtool: InputTypes
+}
+
+/* TIPOS DOS OUTROS ELEMENTOS */
 export type ElementsTypes = "checkbox" |
 'select' |
 'search' |
@@ -35,9 +41,18 @@ export type ElementsTypes = "checkbox" |
 'taglist' |
 'group'
 
-export type SchemaType  = (InputProps | PasswordProps | CheckboxProps | SelectProps | SearchProps | FileProps | RadioProps | TaglistProps | ToggleProps | MaskProps | GroupProps | { [x: string]: any }) & {
-    formtool: InputTypes | ElementsTypes | string
+// Checkbox
+export interface CheckboxSchemaProps extends CheckboxProps {
+    formtool: 'checkbox'
 }
+
+// Select
+export interface SelectSchemaProps extends SelectProps {
+    formtool: 'select'
+}
+
+/* TIPOS DO SCHEMA */
+export type SchemaType  = InputSchemaProps | CheckboxSchemaProps | SelectSchemaProps
 
 export type GroupProps = {
     title?: string,
