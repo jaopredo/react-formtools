@@ -8,7 +8,7 @@ import { jaroWinklerSimilarity } from '../utils/functions'
 export function FormtoolsTaglist(props: TaglistProps) {
 	const { setValue } = useFormContext()
 	const [ loading, setLoading ] = useState<boolean>(false)
-	const [ editedOptions, setEditedOptions ] = useState<OptionType[]>(props.options || [])
+	const [ editedOptions, setEditedOptions ] = useState<OptionType[]>( props.type=='options' ? props.options : [] )
 	const [ tags, setTags ] = useState<OptionType[]>([])
 	const [ showOptions, setShowOptions ] = useState<boolean>(false)
     const inputRef = useRef<HTMLInputElement>(null)
@@ -20,7 +20,7 @@ export function FormtoolsTaglist(props: TaglistProps) {
 
 
 	useEffect(() => {
-		if (props.asyncLoad) {
+		if (props.type == 'async') {
 			setLoading(true)
 			props.asyncLoad().then(resp=>{
 				setEditedOptions(resp)
@@ -33,11 +33,11 @@ export function FormtoolsTaglist(props: TaglistProps) {
 	/* QUANDO EU CLICAR NO ENTER OU NA VIRGULA */
 	function handleKeyUp(e: KeyboardEvent<HTMLInputElement>) {
 		const { value } = e.currentTarget
-        if (props.type === 'typing' || props.type==='async' && (e.key === 'Enter' || e.key === ',')) {
-            let newValue = value.slice(-1)===','?value.slice(0,-1):value
+        if ((props.type === 'typing' || props.type==='async') && (props.addKeys.includes(e.key))) {
+            let newValue = value.slice(-1)===e.key?value.slice(0,-1):value
             setTags([...tags, {value: newValue, label: newValue}])
             e.currentTarget.value = ""
-        } else if (props.type === 'options' && props.options) {
+        } else if (props.type === 'options') {
             if (value === "") {
                 setEditedOptions(props.options)
             } else {

@@ -75,7 +75,9 @@ export interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 }
 
 
-export type TaglistProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLInputElement> & ({
+export type TaglistProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLInputElement> & {
+    addKeys: string
+} & ({
 	type: 'options'
 	options: OptionType[]
 } | {
