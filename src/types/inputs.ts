@@ -39,8 +39,10 @@ export type OptionType = {
 }
 
 export type SelectProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLSelectElement> & ({
+    type: 'options'
 	options: OptionType[]
 } | {
+    type: 'async'
 	asyncLoad: () => Promise<any>
 })
 

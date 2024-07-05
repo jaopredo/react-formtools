@@ -9,7 +9,7 @@ export function FormtoolsSelect (props: SelectProps) {
 	const [ showDropdown, setShowDropdown ] = useState<boolean>(false)
 	const [ inputLabel, setInputLabel ] = useState<string>('')
 
-	const [ options, setOptions ] = useState<OptionType[]|undefined>(props.options)
+	const [ options, setOptions ] = useState<OptionType[]|undefined>(props.type == 'options' ? props.options : [])
 
 	const handleClickSelect = () => setShowDropdown(!showDropdown)
 	const handleClickOption = (label: string, value: string) => {
@@ -18,7 +18,7 @@ export function FormtoolsSelect (props: SelectProps) {
 	}
 
 	useEffect(() => {
-		if (props.asyncLoad) {
+		if (props.type == 'async') {
 			props.asyncLoad().then(resp => setOptions(resp))
 		}
 	}, [])
