@@ -47,17 +47,59 @@ export interface CheckboxSchemaProps extends CheckboxProps {
 }
 
 // Select
-export interface SelectSchemaProps extends SelectProps {
+export type SelectSchemaProps = SelectProps & {
     formtool: 'select'
 }
 
-/* TIPOS DO SCHEMA */
-export type SchemaType  = InputSchemaProps | CheckboxSchemaProps | SelectSchemaProps
+// Search
+export interface SearchSchemaProps extends SearchProps {
+    formtool: 'search'
+}
 
-export type GroupProps = {
+// File
+export interface FileSchemaProps extends FileProps {
+    formtool: 'file'
+}
+
+// Mask
+export interface MaskSchemaProps extends MaskProps {
+    formtool: 'mask'
+}
+
+// Radio
+export interface RadioSchemaProps extends RadioProps {
+    formtool: 'radio'
+}
+
+// Toggle
+export interface ToggleSchemaProps extends ToggleProps {
+    formtool: 'toggle'
+}
+
+// Taglist
+export type TaglistSchemaProps = TaglistProps & {
+    formtool: 'taglist'
+}
+
+// Group
+export type GroupSchemaProps = {
+    formtool: 'group'
     title?: string,
     schema: SchemaType[]
 }
+
+
+/* TIPOS DO SCHEMA */
+export type SchemaType  = InputSchemaProps |
+    CheckboxSchemaProps |
+    SelectSchemaProps |
+    SearchSchemaProps |
+    FileSchemaProps |
+    MaskSchemaProps |
+    RadioSchemaProps |
+    ToggleSchemaProps |
+    TaglistSchemaProps |
+    GroupSchemaProps
 
 export interface SchemaProps {
 	schema: SchemaType[]
