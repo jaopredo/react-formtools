@@ -3,10 +3,12 @@ import Wrapper from './generic/Wrapper'
 import { CheckboxProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 
-export function FormtoolsCheckbox(props: CheckboxProps, ref: string) {
+import { getWrapperProperties } from '../utils/components'
+
+export function FormtoolsCheckbox(props: CheckboxProps) {
 	const { register } = useFormContext()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper {...getWrapperProperties<CheckboxProps>(props)}>
 		{ !props.options && <>
 			<input className={'formtools-checkbox'} type="checkbox" {...register(props.name, props.validation)} id={props.name} />
 			<label className={'formtools-checkbox-label'} htmlFor={props.name}>{props.placeholder}</label>

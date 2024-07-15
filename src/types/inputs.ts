@@ -18,6 +18,15 @@ export interface DefaultProps {
 	beforeicon?: ReactElement,
 	aftericon?: ReactElement,
 	validation?: RegisterOptions<FieldValues, string>,
+
+    // Propriedades de className
+    containerClassName?: string
+    labelClassName?: string
+    insiderClassName?: string
+    afterIconClassName?: string
+    beforeIconClassName?: string
+    helpClassName?: string
+    errorsClassName?: string
 }
 type OmitedProps<T> = Omit<HTMLProps<T>, keyof DefaultProps>
 

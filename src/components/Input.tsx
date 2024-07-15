@@ -3,10 +3,14 @@ import { InputProps } from '../types/inputs'
 import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'
 
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
+
 export const FormtoolsInput = forwardRef<HTMLInputElement, InputProps>(function (props, ref) {
 	const { register } = useFormContext()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
-		<input {...props} {...register(props.name, props.validation)} className={'formtools-input'} />
+    console.log(removeWrapperProperties(props))
+
+	return <Wrapper {...getWrapperProperties<InputProps>(props)}>
+		<input {...removeWrapperProperties(props)} {...register(props.name, props.validation)} className={'formtools-input'} />
 	</Wrapper>
 })

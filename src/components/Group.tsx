@@ -1,11 +1,13 @@
 import React from 'react'
+import { HTMLProps } from 'react'
 
-export function FormtoolsGroup({ title, children }: {
+export function FormtoolsGroup({ title, children, titleclassname, ...rest }: {
 	title?: string,
-	children: React.ReactNode
-}) {
-	return <fieldset className={'formtools-group'}>
-		{ title && <legend className={'formtools-group-title'}>{title}</legend> }
+
+    titleclassname?: string
+} & HTMLProps<HTMLFieldSetElement>) {
+	return <fieldset className={'formtools-group' + ` ${rest.className || ''}`} {...rest}>
+		{ title && <legend className={'formtools-group-title' + ` ${titleclassname}`}>{title}</legend> }
 		{ children }
 	</fieldset>
 }

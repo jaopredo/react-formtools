@@ -3,12 +3,45 @@ import { FileProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 import React, { useState, Children } from 'react'
 
-export function FormtoolsFile({ name, label, help, aftericon, beforeicon, validation, placeholder, ...rest }: FileProps) {
+import { getWrapperProperties } from '../utils/components'
+
+export function FormtoolsFile({
+    name,
+    label,
+    help,
+    aftericon,
+    beforeicon,
+    validation,
+    placeholder,
+
+    containerClassName: containerclassname,
+    labelClassName: labelclassname,
+    insiderClassName: insiderclassname,
+    beforeIconClassName: beforeIconclassname,
+    afterIconClassName: afterIconclassname,
+    helpClassName: helpclassname,
+    errorsClassName: errorsclassname,
+    ...rest
+}: FileProps) {
 	const { register } = useFormContext()
 	const [ filesNames, setFilesNames ] = useState<string[]>([])
 
-	return <Wrapper name={name} label={label} help={help} aftericon={aftericon}
-	beforeicon={beforeicon}>
+	return <Wrapper
+        name={name}
+        label={label}
+        help={help}
+        aftericon={aftericon}
+        beforeicon={beforeicon}
+        {...{
+            containerClassName: containerclassname,
+            labelClassName: labelclassname,
+            insiderClassName: insiderclassname,
+            beforeIconClassName: beforeIconclassname,
+            afterIconClassName: afterIconclassname,
+            helpClassName: helpclassname,
+            errorsClassName: errorsclassname,
+        }}
+    >
 		<input className={'formtools-input'} type="file" id={name} style={{ display: 'none' }} {...rest} {...register(name, {
 			...validation,
 			onChange: (e) => setFilesNames(Object.values(e.target.files as FileList).map((file) => file.name))
