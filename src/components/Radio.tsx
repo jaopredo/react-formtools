@@ -4,14 +4,16 @@ import { RadioProps, ToggleProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 import styled from 'styled-components'
 
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
+
 export function FormtoolsRadio(props: RadioProps) {
 	const { register } = useFormContext()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
-		<ul className={'formtools-radio-list'}>
-			{Children.toArray(props.options.map(opt => <li className={'formtools-radio-item'}>
-				<label className={'formtools-radio-label'} htmlFor={opt.value}>{opt.label}</label>
-				<input className={'formtools-radio'} type="radio" {...register(props.name, props.validation)} id={opt.value} value={opt.value}/>
+	return <Wrapper {...getWrapperProperties(props)}>
+		<ul className={`formtools-radio-list ${props.radioListClassName||''}`}>
+			{Children.toArray(props.options.map(opt => <li className={`formtools-radio-item ${props.radioListItemClassName||''}`}>
+				<label className={`formtools-radio-label ${props.radioLabelClassName||''}`} htmlFor={opt.value}>{opt.label}</label>
+				<input className={`formtools-radio ${props.className||''}`} type="radio" {...register(props.name, props.validation)} id={opt.value} value={opt.value} {...removeWrapperProperties(props)}/>
 			</li>))}
 		</ul>
 	</Wrapper>
@@ -66,11 +68,11 @@ export function FormtoolsToggle(props: ToggleProps) {
 		setToggled(!toggled)
 	}
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper {...getWrapperProperties(props)}>
 		<Toggle
 			isTurnedOn={toggled}
 			onClick={handleToggle}
-			className={'formtools-toggle'}
-		/> <label className={'formtools-toggle-label'} onClick={handleToggle} htmlFor={props.name}>{props.placeholder}</label>
+			className={`formtools-toggle ${props.className}`}
+		/> <label className={`formtools-toggle-label ${props.labelClassName || ''}`} onClick={handleToggle} htmlFor={props.name}>{props.placeholder}</label>
 	</Wrapper>
 }

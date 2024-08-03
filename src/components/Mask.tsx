@@ -4,23 +4,24 @@ import { MaskProps } from "../types/inputs"
 import { useFormContext, Controller } from 'react-hook-form'
 import { IMaskInput } from 'react-imask'
 
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
 
 export function FormtoolsMask(props: MaskProps) {
     const { control } = useFormContext()
 
-    return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+    return <Wrapper {...getWrapperProperties(props)}>
         <Controller
             control={control}
             name={props.name}
             render={({ field: { onChange } }) => <IMaskInput
-                {...props}
+                {...removeWrapperProperties(props) as MaskProps}
                 onAccept={(value, ref, e) => {
                     onChange(value)
                     if (props.onAccept) {
                         props.onAccept(value, ref, e)
                     }
                 }}
-                className={'formtools-input'}
+                className={`formtools-input ${props.className||''}`}
             />}
         />
     </Wrapper>
