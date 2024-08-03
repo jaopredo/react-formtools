@@ -1,11 +1,9 @@
 import React from 'react'
+import { GroupProps } from '../types/inputs'
 
-export function FormtoolsGroup({ title, children }: {
-	title?: string,
-	children: React.ReactNode
-}) {
-	return <fieldset className={'formtools-group'}>
-		{ title && <legend className={'formtools-group-title'}>{title}</legend> }
+export function FormtoolsGroup({ title, children, titleClassName, className, ...rest }: GroupProps) {
+	return <fieldset className={'formtools-group' + ` ${className || ''}`} {...rest}>
+		{ title && <legend className={'formtools-group-title' + ` ${titleClassName}`}>{title}</legend> }
 		{ children }
 	</fieldset>
 }

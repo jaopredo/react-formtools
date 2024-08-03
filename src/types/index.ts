@@ -21,7 +21,7 @@ export type {
 
 export type {
     ElementsTypes,
-    GroupProps,
+    GroupSchemaProps,
     InputTypes,
     SchemaProps,
     SchemaType

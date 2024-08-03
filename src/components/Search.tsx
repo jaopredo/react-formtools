@@ -4,6 +4,8 @@ import Wrapper from './generic/Wrapper'
 import { useFormContext, useFieldArray } from 'react-hook-form'
 import { IoIosArrowDown } from "react-icons/io"
 
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
+
 export function FormtoolsSearch (props: SearchProps) {
     const { register, setValue, getValues, control } = useFormContext()  // Coisas do formulário
     const [ showDropdown, setShowDropdown ] = useState<boolean>(false)  // State que diz se mostra ou não as opções
@@ -46,24 +48,40 @@ export function FormtoolsSearch (props: SearchProps) {
         getData().then(opts => setOptions(opts))
     }, [inputLabel])
 
-    return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
-    aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
+    return <Wrapper {...getWrapperProperties(props)}
+        aftericon={
+            <IoIosArrowDown onClick={handleClickSelect}/>
+        }
+    >
         <input type="hidden" {...register(props.name, props.validation)}/>
-        {props.multiple && <ul className={'formtools-search-list'}>
-            {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li className={'formtools-search-item'} onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
+        {props.multiple && <ul className={`formtools-search-list ${props.searchListClassName||''}`}>
+            {Children.toArray(Object.keys(multipleSelecteds).map(k => multipleSelecteds[k]?<li className={`formtools-search-item ${props.searchListItemClassName||''}`} onClick={() => handleClickRemove(k)}>{multipleSelecteds[k]}</li>:null))}
         </ul>}
-        <input className={'formtools-input'} ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
-        {showDropdown && <ul className={'formtools-search-options'}>
+        <input className={`formtools-input ${props.className||''}`} ref={typeInputRef} placeholder={props.placeholder} onFocus={()=>setShowDropdown(true)} onChange={e => setInputLabel(e.target.value)}/>
+        {showDropdown && <ul className={`formtools-search-options ${props.searchOptionsClassName||''}`}>
             {options && Children.toArray(options?.map(opt =>
-                    <FormtoolsOption label={opt.label} clickmeta={() => handleClickOption(opt.label, opt.value)}/>
+                    <FormtoolsOption
+                        label={opt.label}
+                        clickmeta={() => handleClickOption(opt.label, opt.value)}
+                        searchOptionClassName={props.searchOptionClassName}
+                    />
                 ))}
-            {!options && <p className={'formtools-search-load'}>Carregando...</p>}
+            {!options && <p className={`formtools-search-load ${props.searchLoadClassName || ''}`}>Carregando...</p>}
             {props.children}
         </ul>}
     </Wrapper>
 }
 
-export function FormtoolsOption({ label, clickmeta }: { label: string, clickmeta: Function }) {
+export function FormtoolsOption(
+    {
+        label,
+        clickmeta,
+        searchOptionClassName
+    }: {
+        label: string
+        clickmeta: Function
+        searchOptionClassName?: string
+    }) {
     const [ selected, setSelected ] = useState<boolean>(false)
 
     function onClick() {
@@ -71,7 +89,7 @@ export function FormtoolsOption({ label, clickmeta }: { label: string, clickmeta
         clickmeta()
     }
 
-    return <li className={'formtools-search-option'} onClick={selected?undefined:onClick}>
+    return <li className={`formtools-search-option ${searchOptionClassName||''}`} onClick={selected?undefined:onClick}>
         {label}
     </li>
 }

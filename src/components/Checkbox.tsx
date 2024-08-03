@@ -3,18 +3,20 @@ import Wrapper from './generic/Wrapper'
 import { CheckboxProps } from '../types/inputs'
 import { useFormContext } from 'react-hook-form'
 
-export function FormtoolsCheckbox(props: CheckboxProps, ref: string) {
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
+
+export function FormtoolsCheckbox(props: CheckboxProps) {
 	const { register } = useFormContext()
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} aftericon={props.aftericon} beforeicon={props.beforeicon}>
+	return <Wrapper {...getWrapperProperties<CheckboxProps>(props)}>
 		{ !props.options && <>
-			<input className={'formtools-checkbox'} type="checkbox" {...register(props.name, props.validation)} id={props.name} />
-			<label className={'formtools-checkbox-label'} htmlFor={props.name}>{props.placeholder}</label>
+			<input className={`formtools-checkbox ${props.className || ''}`} type="checkbox" {...register(props.name, props.validation)} id={props.name} {...removeWrapperProperties(props)} />
+			<label className={`formtools-checkbox-label ${props.labelClassName || ''}`} htmlFor={props.name}>{props.placeholder}</label>
 		</> }
-		{ props.options && <ul className={'formtools-checkbox-list'}>
-			{ Children.toArray(props.options.map(opt => <li className={'formtools-checkbox-item'}>
-				<label className={'formtools-checkbox-label'} htmlFor={opt.value}>{opt.label}</label>
-				<input className={'formtools-checkbox'} id={opt.value} type="checkbox" value={opt.value} {...register(props.name, props.validation)} />
+		{ props.options && <ul className={`formtools-checkbox-list`}>
+			{ Children.toArray(props.options.map(opt => <li className={`formtools-checkbox-item ${props.itemClassName || ''}`}>
+				<label className={`formtools-checkbox-label ${props.labelClassName || ''}`} htmlFor={opt.value}>{opt.label}</label>
+				<input className={`formtools-checkbox ${props.className || ''}`} id={opt.value} type="checkbox" value={opt.value} {...register(props.name, props.validation)} {...removeWrapperProperties(props)} />
 			</li>)) }
 		</ul> }
 	</Wrapper>
