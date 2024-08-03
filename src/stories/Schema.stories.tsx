@@ -36,7 +36,7 @@ const schema: SchemaType[] = [
                     },
                     {
                         label: 'Teste 02',
-                        value: 'test2'
+                        value: 'test1'
                     },
                 ]
             }
