@@ -5,6 +5,8 @@ import React, { useRef, useState, useEffect, KeyboardEvent } from 'react'
 import { IoIosArrowDown } from "react-icons/io"
 import { jaroWinklerSimilarity } from '../utils/functions'
 
+import { getWrapperProperties } from '../utils/components'
+
 export function FormtoolsTaglist(props: TaglistProps) {
 	const { setValue } = useFormContext()
 	const [ loading, setLoading ] = useState<boolean>(false)
@@ -53,21 +55,54 @@ export function FormtoolsTaglist(props: TaglistProps) {
         }
 	}
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon} 
+	return <Wrapper {...getWrapperProperties(props)} 
 	aftericon={<IoIosArrowDown onClick={()=>setShowOptions(!showOptions)}/>}>
-		<ul className={'formtools-taglist'}>
-			{tags.map((opt, idx) => opt && <Tag {...opt} setTags={setTags} tags={tags} key={idx}/>)}
+		<ul className={`formtools-taglist ${props.taglistClassName || ''}`}>
+			{tags.map((opt, idx) =>
+				opt && <Tag
+					{...opt}
+					setTags={setTags}
+					tags={tags}
+					key={idx}
+					
+					taglistTagClassName={props.taglistTagClassName}
+				/>
+			)}
 		</ul>
-		<input ref={inputRef} placeholder={props.placeholder} onKeyUp={handleKeyUp} className={'formtools-input'}/>
-		{(showOptions && props.type!=='typing') && <ul className={'formtools-taglist-options'}>
-			{(props.type=='async' && loading) && <p className={'formtools-taglist-load'}>CARREGANDO</p>}
-			{editedOptions.map((opt, idx)=> <Option {...opt} tags={tags} editedOptions={editedOptions} setTags={setTags} key={idx}/>)}
+		<input ref={inputRef} placeholder={props.placeholder} onKeyUp={handleKeyUp} className={`formtools-input ${props.className||''}`}/>
+		{(showOptions && props.type!=='typing') && <ul className={`formtools-taglist-options ${props.taglistOptionsClassName||''}`}>
+			{(props.type=='async' && loading) && <p className={`formtools-taglist-load ${props.taglistLoadClassName||''}`}>CARREGANDO</p>}
+			{editedOptions.map((opt, idx)=>
+				<Option
+					{...opt}
+					tags={tags}
+					editedOptions={editedOptions}
+					setTags={setTags}
+					key={idx}
+
+					taglistOptionClassName={props.taglistOptionClassName}
+				/>
+			)}
 		</ul>}
 	</Wrapper>
 }
 
 
-function Option({ label, value, tags, setTags, editedOptions }: {editedOptions: OptionType[], tags: OptionType[], setTags: Function} & OptionType) {
+function Option({
+	label,
+	value,
+	tags,
+	setTags,
+	editedOptions,
+
+	taglistOptionClassName
+}: {
+	editedOptions: OptionType[]
+	tags: OptionType[]
+	setTags: Function
+
+	taglistOptionClassName?: string
+} & OptionType) {
 	const [ selected, setSelected ] = useState<boolean>()
 
 	useEffect(() => {
@@ -87,21 +122,23 @@ function Option({ label, value, tags, setTags, editedOptions }: {editedOptions: 
 		}
 	}
 
-	return <li className={'formtools-taglist-option ' + (selected?('formtools-taglist-option-selected'):'')} onClick={onClick}
+	return <li className={`formtools-taglist-option ${taglistOptionClassName||''}` + (selected?('formtools-taglist-option-selected'):'')} onClick={onClick}
 	>{label}</li>
 }
 
 
-function Tag({ label, value, tags, setTags }: {
-	label: string,
-	value: any,
-	setTags: Function,
+function Tag({ label, value, tags, setTags, taglistTagClassName }: {
+	label: string
+	value: any
+	setTags: Function
 	tags: OptionType[]
+	
+	taglistTagClassName?: string
 }) {
 	/* QUANDO EU CLICO NA TAGZINHA */
 	function handleTagClick() {
 		setTags(tags.filter(tag => tag.value !== value))
 	}
 
-	return <li className={'formtools-taglist-tag'} onClick={handleTagClick}>{ label }</li>
+	return <li className={`formtools-taglist-tag ${taglistTagClassName || ''}`} onClick={handleTagClick}>{ label }</li>
 }

@@ -19,18 +19,28 @@ type Story = StoryObj<SchemaProps>
  
 const schema: SchemaType[] = [
     {
-        formtool: 'text',
-        label: 'Teste',
-        name: 'teste',
-        validation: {
-            required: { value: true, message: 'Preencha' }
-        },
-        aftericon: <CiFileOn/>,
-
-        errorsClassName: 'test',
-        containerClassName: 'teste',
-        afterIconClassName: 'outro teste'
-        // className: 'test'
+        formtool: 'group',
+        schema: [
+            {
+                formtool: 'select',
+                label: 'Teste',
+                name: 'teste',
+                validation: {
+                    required: { value: true, message: 'Preencha' }
+                },
+                type: 'options',
+                options: [
+                    {
+                        label: 'Teste 01',
+                        value: 'test1'
+                    },
+                    {
+                        label: 'Teste 02',
+                        value: 'test2'
+                    },
+                ]
+            }
+        ]
     }
 ]
 

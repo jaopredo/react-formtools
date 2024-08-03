@@ -4,6 +4,8 @@ import Wrapper from './generic/Wrapper'
 import { useFormContext } from 'react-hook-form'
 import { IoIosArrowDown } from "react-icons/io"
 
+import { getWrapperProperties, removeWrapperProperties } from '../utils/components'
+
 export function FormtoolsSelect (props: SelectProps) {
 	const { register, setValue } = useFormContext()
 	const [ showDropdown, setShowDropdown ] = useState<boolean>(false)
@@ -23,12 +25,19 @@ export function FormtoolsSelect (props: SelectProps) {
 		}
 	}, [])
 
-	return <Wrapper name={props.name} label={props.label} help={props.help} beforeicon={props.beforeicon}
+	return <Wrapper {...getWrapperProperties(props)}
 	aftericon={<IoIosArrowDown onClick={handleClickSelect}/>}>
-		<input className={'formtools-input'} placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
-		{showDropdown && <ul className={'formtools-select-options'}>
-			{options && Children.toArray(options?.map(opt => <li className={'formtools-select-option'} onClick={() => handleClickOption(opt.label, opt.value)}>{opt.label}</li>))}
-			{!options && <p className={'formtools-select-load'}>Carregando...</p>}
+		<input className={`formtools-input ${props.className||''}`} placeholder={props.placeholder} value={inputLabel} readOnly {...register(props.name, props.validation)} onClick={handleClickSelect}/>
+		{showDropdown && <ul className={`formtools-select-options ${props.selectOptionsClassName||''}`}>
+			{
+				options && Children.toArray(options?.map(opt =>
+					<li
+						className={`formtools-select-option ${props.selectOptionClassName||''}`}
+						onClick={() => handleClickOption(opt.label, opt.value)}
+					>{opt.label}</li>)
+				)
+			}
+			{!options && <p className={`formtools-select-load ${props.selectLoadClassName||''}`}>Carregando...</p>}
 			{props.children}
 		</ul>}
 	</Wrapper>

@@ -42,7 +42,7 @@ export function getWrapperProperties<T extends DefaultProps>(props: T): DefaultP
     })
 }
 
-export function removeWrapperProperties<T extends DefaultProps, E extends HTMLElement>(props: T): HTMLProps<E> {
+export function removeWrapperProperties<T extends DefaultProps, E extends HTMLElement>(props: T, extras: string[] = []): HTMLProps<E> {
     const keysList = [
         'formtool',
 
@@ -59,7 +59,9 @@ export function removeWrapperProperties<T extends DefaultProps, E extends HTMLEl
         'beforeIconClassName',
         'afterIconClassName',
         'helpClassName',
-        'errorsClassName'
+        'errorsClassName',
+
+        ...extras
     ]
     let newObject: any = {}
 
@@ -71,5 +73,5 @@ export function removeWrapperProperties<T extends DefaultProps, E extends HTMLEl
         }
     })
 
-    return ({}) as HTMLProps<E>
+    return newObject as HTMLProps<E>
 }

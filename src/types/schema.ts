@@ -8,6 +8,7 @@ import {
     RadioProps,
     TaglistProps,
     ToggleProps,
+    GroupProps,
     PasswordProps
 } from '../types/inputs'
 
@@ -82,9 +83,8 @@ export type TaglistSchemaProps = TaglistProps & {
 }
 
 // Group
-export type GroupSchemaProps = {
+export type GroupSchemaProps = GroupProps & {
     formtool: 'group'
-    title?: string,
     schema: SchemaType[]
 }
 

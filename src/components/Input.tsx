@@ -8,9 +8,7 @@ import { getWrapperProperties, removeWrapperProperties } from '../utils/componen
 export const FormtoolsInput = forwardRef<HTMLInputElement, InputProps>(function (props, ref) {
 	const { register } = useFormContext()
 
-    console.log(removeWrapperProperties(props))
-
 	return <Wrapper {...getWrapperProperties<InputProps>(props)}>
-		<input {...removeWrapperProperties(props)} {...register(props.name, props.validation)} className={'formtools-input'} />
+		<input {...removeWrapperProperties(props)} {...register(props.name, props.validation)} className={`formtools-input ${props.className}`} />
 	</Wrapper>
 })
