@@ -2,7 +2,7 @@ import { FormProvider, FieldValues, useForm, SubmitHandler } from 'react-hook-fo
 import type { FormtoolsFormProps } from '../types/form'
 import React, { useEffect } from 'react'
 
-export function FormtoolsForm<T extends FieldValues>({ children, onSubmit, setMethods, multipart }: FormtoolsFormProps<T>) {
+export function FormtoolsForm<T extends FieldValues>({ children, onSubmit, setMethods, multipart, className }: FormtoolsFormProps<T>) {
 	const methods = useForm<T>()
 
 	useEffect(() => {
@@ -24,7 +24,7 @@ export function FormtoolsForm<T extends FieldValues>({ children, onSubmit, setMe
 	}
 
 	return <FormProvider {...methods}>
-		<form onSubmit={methods.handleSubmit(beforeSubmit)}>
+		<form onSubmit={methods.handleSubmit(beforeSubmit)} className={className}>
 			{ children }
 		</form>
 	</FormProvider>
