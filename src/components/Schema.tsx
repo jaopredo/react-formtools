@@ -1,5 +1,5 @@
 import { SchemaProps } from '../types/schema'
-import React, { Children } from 'react'
+import React, { Children, useEffect } from 'react'
 import {
 	FormtoolsInput,
     FormtoolsPassword,
@@ -51,10 +51,15 @@ const components = {
 export function FormtoolsSchema(props: SchemaProps) {
 	const { inputTypes, customComponents } = useConfigContextProvider()
 
+
 	return <>
 		{Children.toArray(props.schema.map((schema) => {
 			if (inputTypes?.indexOf(schema.formtool)!==-1) {
-				return <FormtoolsInput {...schema as any} type={schema.formtool}/>
+                console.log(schema)
+				return <FormtoolsInput
+                    type={schema.formtool}
+                    {...schema as InputProps}
+                />
 			} else if (Object.keys(components).indexOf(schema.formtool)!==-1) {
 				return components?.[schema.formtool as keyof typeof components](schema as any)
 			} else {
