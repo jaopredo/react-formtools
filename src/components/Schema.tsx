@@ -24,7 +24,8 @@ import {
     FileProps,
     RadioProps,
     TaglistProps,
-    ToggleProps
+    ToggleProps,
+    GroupProps
 } from '../types/inputs'
 
 const components = {
@@ -37,12 +38,9 @@ const components = {
     file: (schema: FileProps) => <FormtoolsFile {...schema}/>,
     taglist: (schema: TaglistProps) => <FormtoolsTaglist {...schema}/>,
     mask: (schema: MaskProps) => <FormtoolsMask {...schema}/>,
-    group: (schema: {
-        title?: string,
-        schema: SchemaType[]
-    }) => <FormtoolsGroup title={schema.title}>
+    group: ({schema, ...rest}: GroupProps & { schema: SchemaType[] }) => <FormtoolsGroup {...rest}>
         <FormtoolsSchema
-            schema={schema.schema}
+            schema={schema}
         />
     </FormtoolsGroup>
 }

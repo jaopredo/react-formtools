@@ -24,14 +24,20 @@ type Story = StoryObj<SchemaProps>
  
 const schema: SchemaType[] = [
     {
-        formtool: 'text',
-        label: 'Insira seu nome',
-        name: 'name',
-    },
-    {
-        formtool: 'password',
-        label: 'Insira uma senha',
-        name: 'password'
+        formtool: 'group',
+        className: 'teste',
+        schema: [
+            {
+                formtool: 'text',
+                label: 'Insira seu nome',
+                name: 'name',
+            },
+            {
+                formtool: 'password',
+                label: 'Insira uma senha',
+                name: 'password'
+            }
+        ]
     }
 ]
 
