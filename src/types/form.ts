@@ -9,6 +9,6 @@ export type FormtoolsFormProps<T extends any> = {
 	multipart: true
 	onSubmit: (data: FormData) => void
 } | {
-	multipart: false | undefined | null | void
+	multipart?: false | undefined | null | void
 	onSubmit: (data: T) => void
 })

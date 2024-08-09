@@ -28,7 +28,10 @@ export const Primary: Story = {
         }
 
         return <FormtoolsForm {...args} onSubmit={onSubmit}>
-
+            <FormtoolsInput
+                name='name'
+                label='Digite seu nome:'
+            />
         </FormtoolsForm>
     }
 }
