@@ -9,7 +9,8 @@ import {
     TaglistProps,
     ToggleProps,
     GroupProps,
-    PasswordProps
+    PasswordProps,
+    DefaultProps
 } from '../types/inputs'
 
 /* TIPOS DO INPUT */
@@ -83,14 +84,14 @@ export type TaglistSchemaProps = TaglistProps & {
 }
 
 // Group
-export type GroupSchemaProps = GroupProps & {
+export type GroupSchemaProps<CustomComponentsProps extends DefaultProps | undefined = undefined> = GroupProps & {
     formtool: 'group'
-    schema: SchemaType[]
+    schema: SchemaType<CustomComponentsProps>[]
 }
 
 
 /* TIPOS DO SCHEMA */
-export type SchemaType  = InputSchemaProps |
+export type SchemaType<CustomComponentsProps extends DefaultProps | undefined = undefined>  = InputSchemaProps |
     CheckboxSchemaProps |
     SelectSchemaProps |
     SearchSchemaProps |
@@ -99,8 +100,9 @@ export type SchemaType  = InputSchemaProps |
     RadioSchemaProps |
     ToggleSchemaProps |
     TaglistSchemaProps |
-    GroupSchemaProps
+    GroupSchemaProps<CustomComponentsProps> |
+    CustomComponentsProps
 
-export interface SchemaProps {
-	schema: SchemaType[]
+export interface SchemaProps<CustomComponentsProps extends DefaultProps | undefined = undefined> {
+	schema: SchemaType<CustomComponentsProps>[]
 }
