@@ -54,12 +54,12 @@ Here, you'll see all of the components and how to use them, also their propertie
 ### Global Structure
 All of the components follow a pre-made structure, made for you to have a easy access to the components class so you can style it easily
 
-![Global Structure](https://i.ibb.co/hXnWQCm/Generic-Wrapper.png)
+![Global Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 This is the global component that wraps all other components. **Notice** that depending on what component you are using, the **input's container structure** can change.
 
 ### Styling
-The structure shown on the previous topic, isn't named like that for nothing. Those containers have each of them a class, named 'formtools-{container name}', for example, the errors container class is named 'formtools-errors'. **Have in mind that all component's structures that will be shown follow the same logic**.
+The structure shown on the previous topic, isn't named like that for nothing. Those containers have each of them a class, named 'formtools-{container name}', for example, the error container class is named 'formtools-error'. **Have in mind that all component's structures that will be shown follow the same logic**.
 
 ### Global Properties
 ```tsx
@@ -188,7 +188,7 @@ The Input component is the simplest one. It shows a simple Input Component. Its 
 
 
 #### Input Structure
-![Input Structure](https://i.ibb.co/hXnWQCm/Generic-Wrapper.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Type
 ```ts
@@ -222,7 +222,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io"
 ```
 
 #### Password Structure
-![Input Structure](https://i.ibb.co/hXnWQCm/Generic-Wrapper.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Type
 ```ts
@@ -249,7 +249,7 @@ The mask component uses a third-party library called [react-imask](https://imask
 ```
 
 #### Mask Structure
-![Input Structure](https://i.ibb.co/hXnWQCm/Generic-Wrapper.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Types
 ```ts
@@ -264,11 +264,11 @@ interface MaskProps extends ReactMaskProps<HTMLInputElement>, DefaultProps {
 The file component it's made to handle the file inputs, so it has a better way to be styled. Yes you can make a normal `<FormtoolsInput type="file"/>` component, but the default file input isn't that easy to style. So we made a better structured file input.
 
 #### File Structure
-![File](https://i.ibb.co/bW7jM7n/FIle-Component.png)
+![File](https://i.ibb.co/sJ34Dxx/FIle-Component.png)
 
 #### Types
 ```ts
-export interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
 	multiple?: boolean,
 
     fileInputClassName?: string,
@@ -304,10 +304,10 @@ The checkbox component is capable of showing multiple checkboxes, or just a simp
 
 #### Checkbox Structure
 ##### Multiple Checkbox
-![Multiple Checkbox](https://i.ibb.co/p2CkgqD/Multiple-Checkboxes-Component.png)
+![Multiple Checkbox](https://i.ibb.co/wW70Bhz/Multiple-Checkboxes-Component.png)
 
 ##### Single Checkbox
-![Single Checkbox](https://i.ibb.co/K9LCG2c/Single-Checkbox-Component.png)
+![Single Checkbox](https://i.ibb.co/3ycZR80/Single-Checkbox-Component.png)
 
 #### Types
 ```ts
@@ -335,7 +335,7 @@ Is really similar to the **Checkbox Component**, but you can't do a single Radio
 ```
 
 #### Radio Structure
-![Multiple Checkbox](https://i.ibb.co/Z8BF4S0/Multiple-Radios-Component.png)
+![Multiple Checkbox](https://i.ibb.co/Rc0jKJT/Multiple-Radios-Component.png)
 
 #### Types
 ```ts
@@ -358,7 +358,7 @@ The toggle component is a made component that simulates a toggle button. It has 
 | turnedOffValue | any | Value that will be set when the button is OFF |
 
 #### Toggle Structure
-![Toggle](https://i.ibb.co/hXZtLtg/Toggle-Component.png)
+![Toggle](https://i.ibb.co/sqQpFwh/Toggle-Component.png)
 
 #### Types
 ```ts
@@ -414,10 +414,10 @@ This example shows a demonstration of a resolve Promise and an axios call.
 
 #### Select Structure
 ##### With sync load
-![Sync Select](https://i.ibb.co/h8nwH2t/Select-Sync-Component.png)
+![Sync Select](https://i.ibb.co/XCnW8Vs/Select-Sync-Component.png)
 
 ##### With async load
-![Async Select](https://i.ibb.co/yqF5CZg/Select-Async-Component.png)
+![Async Select](https://i.ibb.co/k5WjjLG/Select-Async-Component.png)
 
 #### Types
 ```ts
@@ -447,14 +447,14 @@ The taglist component is similar to the **select component**, but it is possible
 
 
 #### Structure
-Options Structure
-![Options Taglist](https://i.ibb.co/xgF65x8/Taglist-Options-Component.png)
+##### Options Structure
+![Options Taglist](https://i.ibb.co/XW8vNHv/Taglist-Options-Component.png)
 
-Async Structure
-![Taglist Async](https://i.ibb.co/NL402B7/Taglist-Async-Component.png)
+##### Async Structure
+![Taglist Async](https://i.ibb.co/2FZp0YF/Taglist-Async-Component.png)
 
-Typing Structure
-![Taglist Typing](https://i.ibb.co/XYZX6Mh/Taglist-Typing-Component.png)
+##### Typing Structure
+![Taglist Typing](https://i.ibb.co/cQzL62g/Taglist-Typing-Component.png)
 
 #### Types
 ```ts
@@ -520,7 +520,7 @@ The `http://localhost:3000/workers` returns this same json, and the `?name_like=
 ```
 
 #### Structure
-![Search Component](https://i.ibb.co/SmmLPLy/Search-Component.png)
+![Search Component](https://i.ibb.co/55zhjJn/Search-Component.png)
 
 #### Types
 ```ts
