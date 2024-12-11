@@ -18,6 +18,17 @@ This library still on develop, so if you find a bug, or have any suggestion to c
 2. [Styled Components](https://styled-components.com/)
 3. [React IMask](https://imask.js.org/guide.html#getting-started)
 
+## Installation
+### Npm
+```
+npm install formtools-react
+```
+
+### Yarn
+```
+yarn add formtools-react
+```
+
 ## Basic usage
 After installing the library, the first thing you'll want to do is make the form:
 
