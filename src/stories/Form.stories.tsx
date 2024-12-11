@@ -19,7 +19,7 @@ type Story = StoryObj<FormtoolsFormProps<User>>
 
 export const Primary: Story = {
     args: {
-        // multipart: true
+        multipart: true
     },
     render: function Render(args) {
 

@@ -26,7 +26,7 @@ export interface DefaultProps {
     afterIconClassName?: string
     beforeIconClassName?: string
     helpClassName?: string
-    errorsClassName?: string
+    errorClassName?: string
 }
 type OmitedProps<T> = Omit<HTMLProps<T>, keyof DefaultProps>
 

@@ -7,6 +7,9 @@ The main problem of making forms is the amount of code that is needed to make a 
 Even with frameworks like [react-hook-form](https://react-hook-form.com/), forms can be a pain in the ass!
 Thinking on this type of situations, I made a library with ready-to-go components, like inputs, selects, and masks inputs, and you just need to pass some args to them!
 
+## Disclaimer
+This library was inspired by the Vue library **Formkit**. Access it [here](https://formkit.com/)
+
 ## Warning
 This library still on develop, so if you find a bug, or have any suggestion to contribute on the project, try making an issue, we will see it for sure :D
 
@@ -14,6 +17,17 @@ This library still on develop, so if you find a bug, or have any suggestion to c
 1. [React Hook Form](https://react-hook-form.com/)
 2. [Styled Components](https://styled-components.com/)
 3. [React IMask](https://imask.js.org/guide.html#getting-started)
+
+## Installation
+### Npm
+```
+npm install formtools-react
+```
+
+### Yarn
+```
+yarn add formtools-react
+```
 
 ## Basic usage
 After installing the library, the first thing you'll want to do is make the form:
@@ -51,12 +65,12 @@ Here, you'll see all of the components and how to use them, also their propertie
 ### Global Structure
 All of the components follow a pre-made structure, made for you to have a easy access to the components class so you can style it easily
 
-INSERT IMAGE
+![Global Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 This is the global component that wraps all other components. **Notice** that depending on what component you are using, the **input's container structure** can change.
 
 ### Styling
-The structure shown on the previous topic, isn't named like that for nothing. Those containers have each of them a class, named 'formtools-{container name}', for example, the errors container class is named 'formtools-errors'.
+The structure shown on the previous topic, isn't named like that for nothing. Those containers have each of them a class, named 'formtools-{container name}', for example, the error container class is named 'formtools-error'. **Have in mind that all component's structures that will be shown follow the same logic**.
 
 ### Global Properties
 ```tsx
@@ -77,7 +91,7 @@ The structure shown on the previous topic, isn't named like that for nothing. Th
 
 * **Name**: The name of the key returned on the "onSubmit" data parameter (See it on **FormtoolsForm**)
 * **Label**: The input label
-* **Help**: Set a text that helps the user to understand what he have to do
+* **Help**: Set a text that helps the user to understand what he has to do
 * **Before Icon** and **After Icon**: The before and after icon must be a React Element, any element that returns some JSX will be able to put something onto the container, but it is recommended that only Icons must be passed, a good library recommended to use is [react-icons](https://react-icons.github.io/react-icons/)
 * **Validation**: An object representing the validations that will be made. It is the same object passed on the **React Hook Form** **register** function. (see it [here](https://react-hook-form.com/docs/useform/register))
 
@@ -85,6 +99,7 @@ The structure shown on the previous topic, isn't named like that for nothing. Th
 These properties are listed on the **DefaultProps** interface
 ```ts
 import type { RegisterOptions, FieldValues } from 'react-hook-form'
+
 interface DefaultProps {
     name: string,
     label: string,
@@ -138,24 +153,27 @@ interface FormtoolsFormProps<T> {
 }
 ```
 
-#### Usage
+#### Usage Example
 ```tsx
 import { useState } from 'react'
 import { FormtoolsForm, FormtoolsInput, FormtoolsFile } from "formtools-react"
 
-interface UserValues {
+interface UserValues {  // Declaring my form fields
     name: string
+    photo: FileList
 }
 
-function TestForm() {
+function TestForm() {  // Creating the component
     const [ methods, setMethods ] = useState()
 
+    // Declaring the function executed before
     function onSubmit(data: FormData) {
         for (value of data) {
             console.log(value)
         }
     }
-
+    
+    // Making the basic form
     return <FormtoolsForm<UserValues>
         onSubmit={onSubmit}
         setMethods={setMethods}
@@ -181,7 +199,7 @@ The Input component is the simplest one. It shows a simple Input Component. Its 
 
 
 #### Input Structure
-![Input Structure](https://i.ibb.co/nkXYNJy/Normal-Input.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Type
 ```ts
@@ -215,7 +233,7 @@ import { IoIosEye, IoIosEyeOff } from "react-icons/io"
 ```
 
 #### Password Structure
-![Input Structure](https://i.ibb.co/nkXYNJy/Normal-Input.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Type
 ```ts
@@ -227,7 +245,7 @@ interface PasswordProps extends Omit<DefaultProps, 'aftericon'> {
 
 
 ### Mask Component
-The mask component uses an third-party library called [react-imask](https://imask.js.org/guide.html#getting-started), but not all of it's properties, just the basic one (mask) (This will be implemented in future library's versions), but you can use it normally like a common component.
+The mask component uses a third-party library called [react-imask](https://imask.js.org/guide.html#getting-started), but not all of it's properties, just the basic one (mask) (This will be implemented in future library's versions), but you can use it normally like a common component.
 
 ```tsx
 <FormtoolsMask
@@ -242,33 +260,39 @@ The mask component uses an third-party library called [react-imask](https://imas
 ```
 
 #### Mask Structure
-![Input Structure](https://i.ibb.co/nkXYNJy/Normal-Input.png)
+![Input Structure](https://i.ibb.co/KVm3VSb/Container.png)
 
 #### Types
 ```ts
 interface MaskProps extends ReactMaskProps<HTMLInputElement>, DefaultProps {
-    mask: string
+    mask: string,
+    className?: string
 }
 ```
 
 
 ### File Component
-The file component it's made to handle the file inputs, so it has a better way to be styled, yes you can make a normal `<FormtoolsInput type="file"/>` component, but the default file input isn't that easy to style. So we made a better structured file input, easiest to style.
+The file component it's made to handle the file inputs, so it has a better way to be styled. Yes you can make a normal `<FormtoolsInput type="file"/>` component, but the default file input isn't that easy to style. So we made a better structured file input.
 
 #### File Structure
-![File](https://i.ibb.co/DQBZ76L/File-Input.png)
+![File](https://i.ibb.co/sJ34Dxx/FIle-Component.png)
 
 #### Types
 ```ts
-interface FileProps extends DefaultProps, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
-    multiple?: boolean
+interface FileProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	multiple?: boolean,
+
+    fileInputClassName?: string,
+    fileListClassName?: string,
+    fileListItemClassName?: string
 }
 ```
 
 
 ### Checkbox Component
-The checkbox component is capable of showing multiple checboxes, or just a simple checkbox. You can pass the options property to tell the multiple props that will be shown
-Unique Checkbox
+The checkbox component is capable of showing multiple checkboxes, or just a simple checkbox. You can pass the options property to tell the multiple props that will be shown
+
+##### Unique Checkbox
 ```tsx
 <FormtoolsCheckbox
     name="terms"
@@ -276,7 +300,8 @@ Unique Checkbox
     placeholder="Yes, i read and agreed with the terms and conditions"
 />
 ```
-Multiple Options
+
+##### Multiple Checkboxes
 ```tsx
 <FormtoolsCheckbox
     name="order"
@@ -289,30 +314,26 @@ Multiple Options
 ```
 
 #### Checkbox Structure
-Multiple Checkbox
-![Multiple Checkbox](https://i.ibb.co/YkdKydD/Multiple-Checkbox.png)
+##### Multiple Checkbox
+![Multiple Checkbox](https://i.ibb.co/wW70Bhz/Multiple-Checkboxes-Component.png)
 
-Single Checkbox
-![Single Checkbox](https://i.ibb.co/nQPVt63/Single-Checkbox.png)
+##### Single Checkbox
+![Single Checkbox](https://i.ibb.co/3ycZR80/Single-Checkbox-Component.png)
 
 #### Types
 ```ts
-interface CheckboxProps extends DefaultProps, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
-    options?: OptionType[]
+interface CheckboxProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	options?: OptionType[]
+
+    labelClassName?: string
+    itemClassName?: string
 }
 ```
 
 
 ### Radio Component
-Is really similar to the **Checkbox Component**, it has the same properties:
-```tsx
-<FormtoolsRadio
-    name="terms"
-    label="Terms: "
-    placeholder="Yes, i read and agreed with the terms and conditions"
-/>
-```
-Multiple Options
+Is really similar to the **Checkbox Component**, but you can't do a single Radio option, you **need** to pass a list of **options**
+
 ```tsx
 <FormtoolsRadio
     name="order"
@@ -325,16 +346,16 @@ Multiple Options
 ```
 
 #### Radio Structure
-Multiple Radio
-![Multiple Checkbox](https://i.ibb.co/YhKx76z/Multiple-Radio.png)
-
-Single Radio
-![Single Checkbox](https://i.ibb.co/Sw5TRYR/Single-Radio.png)
+![Multiple Checkbox](https://i.ibb.co/Rc0jKJT/Multiple-Radios-Component.png)
 
 #### Types
 ```ts
-interface CheckboxProps extends DefaultProps, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
-    options?: OptionType[]
+interface RadioProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	options: OptionType[]
+
+    radioListClassName?: string
+    radioListItemClassName?: string
+    radioLabelClassName?: string
 }
 ```
 
@@ -348,14 +369,17 @@ The toggle component is a made component that simulates a toggle button. It has 
 | turnedOffValue | any | Value that will be set when the button is OFF |
 
 #### Toggle Structure
-![Toggle](https://i.ibb.co/kJzL8pJ/Toggle.png)
+![Toggle](https://i.ibb.co/sqQpFwh/Toggle-Component.png)
 
 #### Types
 ```ts
-interface ToggleProps extends DefaultProps, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
-    toggled?: boolean,
-    turnedOffValue?: any,
-    turnedOnValue?: any
+interface ToggleProps extends DefaultProps, OmitedProps<HTMLInputElement> {
+	toggled?: boolean,
+
+	turnedOffValue?: any,
+	turnedOnValue?: any
+
+    labelClassName?: string
 }
 ```
 
@@ -368,11 +392,12 @@ The select component is a component that shows a lot of options passed by the de
 | asyncLoad | Promise<any> | The async function that loads all the options (Optional) |
 
 #### Example
-Sync Load
+##### Sync Load
 ```tsx
 <FormtoolsSelect
     name="worker"
     label="Select a Worker:"
+    type="options"
     options={[
         { label: 'João Pedro', value: 1 },
         { label: 'Márcio', value: 2 },
@@ -380,8 +405,11 @@ Sync Load
     ]}
 />
 ```
-Async Load
-This example shows a demonstration of a resolve Promise and an axios call
+##### Async Load
+
+This example shows a demonstration of a resolve Promise and an axios call.
+
+
 **Warning**: Important to notice is that the return of this API is the same strucutre of the option type `{label: string, value: any}`, so if you made you own API, or is getting from another API, make sure to have a map function that returns the values as they are supposed to be.
 ```tsx
 <FormtoolsSelect
@@ -396,48 +424,68 @@ This example shows a demonstration of a resolve Promise and an axios call
 ```
 
 #### Select Structure
-Without async load
-![Sync Select](https://i.ibb.co/kckccN4/Select-Sync.png)
+##### With sync load
+![Sync Select](https://i.ibb.co/XCnW8Vs/Select-Sync-Component.png)
 
-With async load
-![Async Select](https://i.ibb.co/nMfHcgL/Select-Async.png)
+##### With async load
+![Async Select](https://i.ibb.co/k5WjjLG/Select-Async-Component.png)
 
 #### Types
 ```ts
-interface SelectProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
-    options?: OptionType[],
-    asyncLoad?: () => Promise<any>
-}
+type SelectProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLSelectElement> & {
+    selectOptionsClassName?: string
+    selectOptionClassName?: string
+    selectLoadClassName?: string
+} & ({
+    type: 'options'
+	options: OptionType[]
+} | {
+    type: 'async'
+	asyncLoad: () => Promise<any>
+})
 ```
 
 
 ### Taglist Component
-The taglist component is similar to the **select component**, but it is possible to **not pass any option**
+The taglist component is similar to the **select component**, but it is possible to **not pass any option**. You choose a option from the list and it appears on the container of the component, or type it and press a key passed in the **addKeys** property
 
 | Property | Type | Description |
 | -------- | ---- | ----------- |
+| addKeys | string[] | In this property, you pass the keys that, when pressed, will add the tags onto the taglist |
+| type | async, options, typing | This property tells how the component will handle the inputs and the options. **Async** you need to pass the asyncLoad property. **Options** you need to pass the options property. **Typing** you don't have to pass any options loader or array, it will set the tags when you press **,** |
 | options | OptionType[] | The options that will be shown (Optional) |
 | asyncLoad | Promise<any> | The async function that loads all the options (Optional) |
-| type | async, options, typing | This property tells how the component will handle the inputs and the options. **Async** you need to pass the asyncLoad property. **Options** you need to pass the options property. **Typing** you don't have to pass any options loader or array, it will set the tags when you press **,** or **Enter** |
 
 
 #### Structure
-Options Structure
-![Options Taglist](https://i.ibb.co/4gww7Pt/Taglist-Options.png)
+##### Options Structure
+![Options Taglist](https://i.ibb.co/XW8vNHv/Taglist-Options-Component.png)
 
-Async Structure
-![Taglist Async](https://i.ibb.co/wYT5bc9/Taglist-Async.png)
+##### Async Structure
+![Taglist Async](https://i.ibb.co/2FZp0YF/Taglist-Async-Component.png)
 
-Typing Structure
-![Taglist Typing](https://i.ibb.co/gWgFzWk/Taglist-Typing.png)
+##### Typing Structure
+![Taglist Typing](https://i.ibb.co/cQzL62g/Taglist-Typing-Component.png)
 
 #### Types
 ```ts
-interface TaglistProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLInputElement>, keyof DefaultProps> {
-    options?: OptionType[],
-    asyncLoad?: () => Promise<any>,
-    type?: 'typing' | 'async' | 'options',
-}
+type TaglistProps = Omit<DefaultProps, 'aftericon'> & OmitedProps<HTMLInputElement> & {
+    addKeys: string[]
+
+    taglistClassName?: string
+    taglistOptionsClassName?: string
+    taglistLoadClassName?: string
+    taglistTagClassName?: string
+    taglistOptionClassName?: string
+} & ({
+	type: 'options'
+	options: OptionType[]
+} | {
+    type: 'async'
+	asyncLoad: () => Promise<any>
+} | {
+    type: 'typing'
+})
 ```
 
 
@@ -483,15 +531,21 @@ The `http://localhost:3000/workers` returns this same json, and the `?name_like=
 ```
 
 #### Structure
-![Search Component](https://i.ibb.co/jgwXmgk/Search-Input.png)
+![Search Component](https://i.ibb.co/55zhjJn/Search-Component.png)
 
 #### Types
 ```ts
-interface SearchProps extends Omit<DefaultProps, 'aftericon'>, Omit<HTMLProps<HTMLSelectElement>, keyof DefaultProps> {
-    url: string,
-    filterSchema: (value: any) => string | string[][] | Record<string, string> | URLSearchParams | undefined,
-    mapper?: (data: any) => OptionType[],
-    multiple?: boolean
+interface SearchProps extends Omit<DefaultProps, 'aftericon'>, OmitedProps<HTMLSelectElement> {
+	url: string
+	filterSchema: (value: any) => string | string[][] | Record<string, string> | URLSearchParams | undefined
+	mapper?: (data: any) => OptionType[]
+	multiple?: boolean
+
+    searchListClassName?: string
+    searchListItemClassName?: string
+    searchOptionsClassName?: string
+    searchLoadClassName?: string
+    searchOptionClassName?: string
 }
 ```
 
@@ -506,8 +560,15 @@ This component just wraps other components as a group, you can name a title to i
 ```
 
 #### Structure
-![Group Component](https://i.ibb.co/GkNRPH7/Group.png)
+![Group Component](https://i.ibb.co/k3yr99D/Group-Component.png)
 
+#### Type
+```ts
+type GroupProps = {
+    title?: string,
+    titleClassName?: string
+} & HTMLProps<HTMLFieldSetElement>
+```
 
 ## Schema
 Schema is a special component. It works using a JSON object, turning it into a functional form.
@@ -535,8 +596,34 @@ Schema is a special component. It works using a JSON object, turning it into a f
     ]}
 >
 ```
+or
+```tsx
+const schema: SchemaProps = [
+    {
+        formtool: 'email',
+        name: 'email',
+        label: 'Email',
+        help: 'Insert your email'
+    },
+    {
+        formtool: 'password',
+        name: 'password',
+        label: 'password',
+        help: 'Insert your password',
+        validation: {
+            minLength: {
+                value: 8,
+                message: "You password needs to have at least 8 characters"
+            }
+        }
+    }
+]
+<FormtoolsSchema
+    schema={schema}
+>
+```
 
-This code is the same as
+Is the same as
 
 ```tsx
 <FormtoolsInput
@@ -576,11 +663,11 @@ import {
 } from 'react-formtools'
 import { useFormContext } from 'react-hook-form'
 
-interface TestProps extends DefaultProps {
-    testprop: string
+interface CustomProps extends DefaultProps {
+    customProp: string
 }
 
-export default function Test(props: TestProps) {
+export default function CustomComponent(props: CustomProps) {
     const { register } = useFormContext()
 
     return <Wrapper {...props}>
@@ -592,31 +679,45 @@ export default function Test(props: TestProps) {
 #### 2. Now, how can I make it possible to pass it on the Schema?
 This is very simple too. You need to pass a configuration provider, provided by the library.
 `import { ConfigContextProvider } from 'react-formtools'`
-This provider receives some informations that will be used by **all forms nested**. The configuration we are looking for is `customComponents`. You will also like to use the `createCustomComponent` function, because the schema uses a specific structure, nothing complex, but you will like for organization and for future updates
+This provider receives some informations that will be used by **all forms nested**. The configuration we are looking for is `customComponents`. You will also like to use the `createCustomComponent` function, because the schema uses a specific structure, nothing complex, but you will like it for organization and for future updates
 
 ```tsx
-import Test from './components/Test'
+// Required imports for creating the Context
+import type { ReactNode } from 'react'
 import { ConfigContextProvider, ConfigInterface, createCustomComponent } from 'react-formtools'
 
 const config: ConfigInterface = {
     customComponents: {
-        test: createCustomComponent(Test)
+        customComponent: createCustomComponent(CustomComponent)
     }
 }
 
+function MyCustomComponentsProvider({ children: ReactNode }) {
+    return <ConfigContextProvider config={config}>
+        {children}
+    </ConfigContextProvider>
+}
+```
+
+After creating the context, you can pass it on the root of your project and use your component on any form schema across it.
+
+```tsx
+// After using it in the root of your project (Or wherever you want to)
+
+const schema = [
+    {
+        formtool: 'customComponent',
+        customProp: 'This is my custom property'
+    }
+]
+
 ...
-<ConfigContextProvider config={config}>
-    <FormtoolsForm onSubmit={data => console.log(data)}>
-        <FormtoolsSchema
-            schema={[
-                {
-                    formtool: 'test',
-                    name: 'test',
-                    label: 'This is a test component'
-                }
-            ]}
-        />
-    </FormtoolsForm>
-</ConfigContextProvider>
-...
+
+return <FormtoolsForm {...}>
+
+<FormtoolsSchema
+    schema={schema}
+/>
+
+</FormtoolsForm>
 ```

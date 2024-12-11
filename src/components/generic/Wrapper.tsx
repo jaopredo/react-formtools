@@ -16,7 +16,7 @@ export default function Wrapper({
     beforeIconClassName: beforeIconclassname,
     afterIconClassName: afterIconclassname,
     helpClassName: helpclassname,
-    errorsClassName: errorsclassname
+    errorClassName: errorclassname
 }: WrapperProps) {
 	const { formState: { errors } } = useFormContext()
 
@@ -32,6 +32,6 @@ export default function Wrapper({
 			</div>}
 		</div>
 		{help && <p className={`formtools-help ${helpclassname||''}`}>{ help }</p>}
-		{errors[name] && <p className={`formtools-errors ${errorsclassname||''}`}>{errors[name]?.message as string}</p>}
+		{errors[name] && <p className={`formtools-errors ${errorclassname||''}`}>{errors[name]?.message as string}</p>}
 	</div>
 }

@@ -84,14 +84,14 @@ export type TaglistSchemaProps = TaglistProps & {
 }
 
 // Group
-export type GroupSchemaProps<CustomComponentsProps extends DefaultProps | undefined = undefined> = GroupProps & {
+export type GroupSchemaProps<CustomComponentsProps extends DefaultProps> = GroupProps & {
     formtool: 'group'
     schema: SchemaType<CustomComponentsProps>[]
 }
 
 
 /* TIPOS DO SCHEMA */
-export type SchemaType<CustomComponentsProps extends DefaultProps | undefined = undefined>  = InputSchemaProps |
+export type SchemaType<CustomComponentsProps extends DefaultProps = DefaultProps>  = InputSchemaProps |
     CheckboxSchemaProps |
     SelectSchemaProps |
     SearchSchemaProps |
@@ -101,8 +101,12 @@ export type SchemaType<CustomComponentsProps extends DefaultProps | undefined = 
     ToggleSchemaProps |
     TaglistSchemaProps |
     GroupSchemaProps<CustomComponentsProps> |
-    CustomComponentsProps
+    (
+        CustomComponentsProps & {
+            formtool: string
+        }
+    )
 
-export interface SchemaProps<CustomComponentsProps extends DefaultProps | undefined = undefined> {
+export interface SchemaProps<CustomComponentsProps extends DefaultProps = DefaultProps> {
 	schema: SchemaType<CustomComponentsProps>[]
 }
