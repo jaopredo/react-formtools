@@ -52,6 +52,8 @@ export function FormtoolsSchema(props: SchemaProps) {
 
 	return <>
 		{Children.toArray(props.schema.map((schema) => {
+            if (!schema) return
+
 			if (inputTypes?.indexOf(schema.formtool)!==-1) {
                 console.log(schema)
 				return <FormtoolsInput

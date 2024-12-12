@@ -32,25 +32,6 @@ function TestComponent(props: CustomComponentProps) {
     </Wrapper>
 }
 
-const meta: Meta<SchemaProps> = {
-    component: FormtoolsSchema,
-    decorators: (Story) => <ConfigContextProvider config={{
-        customComponents: {
-            test: createCustomComponent(TestComponent)
-        }
-    }}>
-        <FormtoolsForm<User> onSubmit={(data: User)=>{
-            console.log(data)
-        }}>
-            <Story/>
-            <button>ENVIAR</button>
-        </FormtoolsForm>
-    </ConfigContextProvider>
-}
- 
-export default meta
-type Story = StoryObj<SchemaProps<CustomComponentProps>>
- 
 const schema: SchemaType<CustomComponentProps>[] = [
     {
         formtool: 'group',
@@ -79,6 +60,28 @@ const schema: SchemaType<CustomComponentProps>[] = [
         name: 'test_input'
     }
 ]
+
+const meta: Meta<SchemaProps> = {
+    component: FormtoolsSchema,
+    decorators: (Story) => <ConfigContextProvider config={{
+        customComponents: {
+            test: createCustomComponent(TestComponent)
+        }
+    }}>
+        <FormtoolsForm<User> onSubmit={(data: User)=>{
+            console.log(data)
+        }}>
+            <Story/>
+            <FormtoolsSchema
+                schema={schema}
+            />
+            <button>ENVIAR</button>
+        </FormtoolsForm>
+    </ConfigContextProvider>
+}
+ 
+export default meta
+type Story = StoryObj<SchemaProps<CustomComponentProps>>
 
 export const Primary: Story = {
     args: {

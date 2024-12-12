@@ -29,3 +29,5 @@ yarn-error.log*
 /.storybook
 /dist
 *.tgz
+
+*storybook.log

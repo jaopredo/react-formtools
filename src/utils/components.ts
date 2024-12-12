@@ -21,7 +21,7 @@ export function getWrapperProperties<T extends DefaultProps>(props: T): DefaultP
         beforeIconClassName,
         afterIconClassName,
         helpClassName,
-        errorsClassName
+        errorClassName: errorsClassName
     } = props
 
     return ({
@@ -38,7 +38,7 @@ export function getWrapperProperties<T extends DefaultProps>(props: T): DefaultP
         beforeIconClassName: beforeIconClassName,
         afterIconClassName: afterIconClassName,
         helpClassName: helpClassName,
-        errorsClassName: errorsClassName
+        errorClassName: errorsClassName
     })
 }
 
